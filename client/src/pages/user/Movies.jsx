@@ -1,8 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
 import {useFetch} from '../../hooks/useFetch'
-import { AxiosInstance } from '../../config/AxiosInstanc.jsx';
+import { AxiosInstance } from '../../config/AxiosInstance.jsx';
 import { useNavigate } from 'react-router-dom';
+
+
 
 export const Movies = () => {
   const [movies, setMovies] = useState([]); 

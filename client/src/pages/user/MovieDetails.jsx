@@ -1,6 +1,6 @@
 import React, { useEffect ,useState} from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { AxiosInstance } from '../../config/AxiosInstance';
+import { AxiosInstance } from '../../config/AxiosInstance.jsx';
 
 export const MovieDetails = () => {
   const navigate =useNavigate()

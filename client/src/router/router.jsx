@@ -1,17 +1,17 @@
 import { createBrowserRouter, } from "react-router-dom";
-import { Userlayout } from "../layout/Userlayout";
-import { ErrorPage } from "../pages/user/ErrorPage";
-import {Home} from "../pages/user/Home"
-import { About } from "../pages/user/About";
-import { Movies } from "../pages/user/Movies";
-import { Events } from "../pages/user/Events";
-import { Contact } from "../pages/user/Contact";
-import { Plays } from "../pages/user/Plays";
+import { Userlayout } from "../layout/Userlayout.jsx";
+import { ErrorPage } from "../pages/user/ErrorPage.jsx";
+import {Home} from "../pages/user/Home.jsx"
+import { About } from "../pages/user/About.jsx";
+import { Movies } from "../pages/user/Movies.jsx";
+import { Events } from "../pages/user/Events.jsx";
+import { Contact } from "../pages/user/Contact.jsx";
+import { Plays } from "../pages/user/Plays.jsx";
 import {LoginPage} from "../pages/shared/LoginPage.jsx" 
 import {SignUpPage} from "../pages/shared/SignUpPage.jsx" 
 import { Profile } from "../pages/user/Profile.jsx";
 import { ProtectRoute } from "./ProtectRoute.jsx";
-import { MovieDetails } from "../pages/user/movieDetails.jsx";
+import MovieDetails from '../pages/user/MovieDetails';
 import { Screens } from "../pages/user/Screens.jsx";
 
 

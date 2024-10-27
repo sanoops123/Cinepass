@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { AxiosInstance } from '../../config/AxiosInstance';
+import { AxiosInstance } from '../../config/AxiosInstance.jsx';
 import toast from 'react-hot-toast';
 
 export const SignUpPage = ({role = 'user'}) => {

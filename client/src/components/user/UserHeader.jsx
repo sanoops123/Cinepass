@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Darkmode } from "../shared/Darkmode";
-import { AxiosInstance } from "../../config/AxiosInstance";
+import { Darkmode } from "../shared/Darkmode.jsx";
+import { AxiosInstance } from "../../config/AxiosInstance.jsx";
 import {ShoppingBag} from 'lucide-react'
 import {SquareUser} from 'lucide-react'
 import toast from "react-hot-toast";

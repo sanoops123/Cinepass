@@ -2,15 +2,16 @@ import express from 'express'
 import { addMovie, deleteMovie, getMovieById, getMovies, updateMovie,getNowShowingMovies ,getUpcomingMovies} from '../controllers/movieControllers.js'
 import { authAdmin } from '../middleware/authAdmin.js'
 const router =express.Router()
+import { upload } from "../middleware/multer.js";
 
 
-router.post("/add-movies",authAdmin, addMovie)
+router.post("/add-movies", upload.single('posterUrl'),authAdmin, addMovie)
 
 router.get("/get-movies",getMovies)
 
 router.get("/movie-byid/:id",getMovieById)
 
-router.put("/movie-update/:id",updateMovie)
+router.put("/movie-update/:id",authAdmin,updateMovie)
 
 router.delete("/movie-delete/:id",authAdmin,deleteMovie)
 

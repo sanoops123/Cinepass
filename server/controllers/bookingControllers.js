@@ -9,13 +9,13 @@ export const movieBooking = async (req, res ,next) => {
     return res.status(400).json({message:"booking not completed"})
    }
 
-      // Find the movie to ensure it exists
+      
       const movie = await Movie.findById(movieId);
       if (!movie) {
         return res.status(404).json({ message: 'Movie not found' });
       }
   
-      // Create a new booking object
+     
       const newBooking = new Booking({
        movieId,
         title,
@@ -29,7 +29,7 @@ export const movieBooking = async (req, res ,next) => {
       });
   
       await newBooking.save();
-      res.status(201).json({ message: 'Booking created successfully', newBooking });
+      res.status(201).json({ message: 'Booking successfully', newBooking });
     } catch (error) {
       res.status(500).json({ message: 'Error creating booking', error });
     }

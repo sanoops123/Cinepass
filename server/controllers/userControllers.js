@@ -32,7 +32,13 @@ export const userSignup = async (req, res, next) => {
     if (savedUser) {
       const token = await generateToken(savedUser._id);
       console.log(token, "token");
-      res.cookie("token", token);
+      res.cookie("token", token,{
+
+      sameSite:"None",
+      secure:true,
+      httpOnly:true
+
+      });
 
       return res
         .status(200)
@@ -66,7 +72,13 @@ export const userLogin = async (req, res, next) => {
     }
     const token = await generateToken(userExist._id,'user');
 
-    res.cookie("token", token);
+    res.cookie("token", token,{
+
+      sameSite:"None",
+      secure:true,
+      httpOnly:true
+
+      });
     res.status(200).json({ message: " user Login successfull",userExist });
   } catch (error) {
     console.log(error);
@@ -95,7 +107,13 @@ export const userProfile = async (req, res, next) => {
 export const userLogOut = async (req,res,next)=>{
   try {
     
-    res.clearCookie("token")
+    res.clearCookie("token",{
+
+      sameSite:"None",
+      secure:true,
+      httpOnly:true
+
+      })
     res.status(200).json({message:"user logged out!"})
   } catch (error) {
     return res

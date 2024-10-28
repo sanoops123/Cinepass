@@ -31,7 +31,13 @@ export const adminSignup = async (req, res, next) => {
     if (savedAdmin) {
       const token = await generateToken(savedAdmin._id, "admin");
       console.log(token, "token");
-      res.cookie("token", token);
+      res.cookie("token", token,{
+
+        sameSite:"None",
+        secure:true,
+        httpOnly:true
+  
+        });
 
       return res
         .status(200)
@@ -69,7 +75,13 @@ export const adminLogin = async (req, res, next) => {
     }
     const token = await generateToken(adminExist._id, 'admin');
 
-    res.cookie("token", token);
+    res.cookie("token", token,{
+
+      sameSite:"None",
+      secure:true,
+      httpOnly:true
+
+      });
     res.status(200).json({ message: "Admin Login successfull", adminExist });
   } catch (error) {
     console.log(error);
@@ -100,7 +112,13 @@ export const adminProfile = async (req, res, next) => {
 
 export const adminLogOut = async (req, res, next) => {
   try {
-    res.clearCookie("token");
+    res.clearCookie("token",{
+
+      sameSite:"None",
+      secure:true,
+      httpOnly:true
+
+      });
     res.status(200).json({ message: "Admin logged out!" });
   } catch (error) {
     return res

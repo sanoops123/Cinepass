@@ -11,8 +11,8 @@ import {LoginPage} from "../pages/shared/LoginPage.jsx"
 import {SignUpPage} from "../pages/shared/SignUpPage.jsx" 
 import { Profile } from "../pages/user/Profile.jsx";
 import { ProtectRoute } from "./ProtectRoute.jsx";
-import MovieDetails from '../pages/user/MovieDetails';
 import { Screens } from "../pages/user/Screens.jsx";
+import { MovieDetails } from "../pages/user/movieDetails.jsx";
 
 
 export const router = createBrowserRouter([

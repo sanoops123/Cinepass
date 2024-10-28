@@ -12,7 +12,8 @@ import {SignUpPage} from "../pages/shared/SignUpPage.jsx"
 import { Profile } from "../pages/user/Profile.jsx";
 import { ProtectRoute } from "./ProtectRoute.jsx";
 import { Screens } from "../pages/user/Screens.jsx";
-import { MovieDetails } from "../pages/user/movieDetails.jsx";
+import { FetchMovieDetails } from "../pages/user/FetchMovieDetails.jsx";
+
 
 
 export const router = createBrowserRouter([
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
         },
         {
         path:"Movies/movie-details/:id",
-        element:<MovieDetails/>
+        element:<FetchMovieDetails/>
         },
         {
         path:'Events',

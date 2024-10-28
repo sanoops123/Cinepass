@@ -2,7 +2,7 @@ import React, { useEffect ,useState} from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AxiosInstance } from '../../config/AxiosInstance.jsx';
 
-export const MovieDetails = () => {
+export const FetchMovieDetails = () => {
   const navigate =useNavigate()
   const [movie, setMovie] = useState(null); 
   const {id} = useParams()

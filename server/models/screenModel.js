@@ -20,7 +20,7 @@ const screenSchema = new mongoose.Schema({
   },
   seats: [
     {
-      seatNumber: { type: String, required: true },
+      seatNumber: { type: Array, required: true },
       isAvailable: { type: Boolean, default: true },
     }
   ],
@@ -33,11 +33,11 @@ const screenSchema = new mongoose.Schema({
         required: true,
       },
       showTime: {
-        type:Number,
+        type:Array,
         required:true
       },
       showDate:{
-        type:String,
+        type:Array,
         required:true,
       },
     },

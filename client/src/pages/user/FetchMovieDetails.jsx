@@ -9,8 +9,8 @@ export const FetchMovieDetails = () => {
   const [movie, loading, error] = useFetch(`/movie/movie-byid/${id}`);
 
   // Function to navigate to booking page
-  const bookings = () => {
-    navigate(`/Movies/movie-details/${id}/bookings`);
+  const viewScreens = () => {
+    navigate(`/Movies/movie-details/${id}/Screens`);
   };
 
   return (
@@ -52,7 +52,7 @@ export const FetchMovieDetails = () => {
 
           <div className="mt-4 space-x-4">
             <button
-              onClick={bookings}
+              onClick={viewScreens}
               className="bg-red-600 text-white hover:bg-red-800 px-4 py-2 rounded-md"
             >
               Book Tickets

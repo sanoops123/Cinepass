@@ -79,10 +79,13 @@ export const deleteScreen = async (req, res, next) => {
 
 export const getScreensByMovieId = async (req, res, next) => {
   try {
-    const { movieId } = req.params;
+    const { id } = req.params;
+
+    console.log('===movie id',id);
+    
 
     const screens = await Screen.find({
-      "movieSchedules.movieId": movieId
+      "movieSchedules.movieId": id
     }).populate("movieSchedules.movieId", "title");
 
     if (!screens || screens.length === 0) {

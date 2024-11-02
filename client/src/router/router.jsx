@@ -12,8 +12,8 @@ import {SignUpPage} from "../pages/shared/SignUpPage.jsx"
 import { Profile } from "../pages/user/Profile.jsx";
 import { ProtectRoute } from "./ProtectRoute.jsx";
 import { FetchMovieDetails } from "../pages/user/FetchMovieDetails.jsx";
-//import { Booking } from "../pages/user/Booking.jsx";
-import { MovieScreens } from "../pages/user/MovieScreens.jsx";
+import { Screens} from "../pages/user/Screens.jsx";
+//import { MovieScreens } from "../pages/user/MovieScreens.jsx";
 
 
 
@@ -66,8 +66,8 @@ export const router = createBrowserRouter([
       element:<Profile/>
       },
       {
-       path:"Movies/movie-details/:id/bookings",
-        element:<MovieScreens/>
+       path:"Movies/movie-details/:id/Screens",
+        element:<Screens/>
       },
       ],
     

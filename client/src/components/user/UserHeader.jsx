@@ -34,7 +34,7 @@ export const UserHeader = () => {
       <div className="container mx-auto flex justify-between items-center py-4 px-6 ">
        
         <div className="text-2xl font-bold">
-          <Link to={'/'} className="text-white">CinePass</Link>
+          <Link to={'/'} className="text-white">CineThinks..</Link>
         </div>
 
        

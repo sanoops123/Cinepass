@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {Link, useNavigate} from "react-router-dom"
 
 export const Home = () => {
+  const navigate = useNavigate()
   
   const movies = [
-    { id: 1, title: "Inception", genre: "Sci-Fi", duration: "2h 28m" },
-    { id: 2, title: "The Dark Knight", genre: "Action", duration: "2h 32m" },
-    { id: 3, title: "Interstellar", genre: "Adventure, Drama", duration: "2h 49m" },
-    { id: 4, title: "Joker", genre: "Drama, Thriller", duration: "2h 2m" },
-    { id: 5, title: "Parasite", genre: "Thriller", duration: "2h 12m" },
-    { id: 6, title: "Avengers: Endgame", genre: "Action, Adventure", duration: "3h 1m" },
-    { id: 7, title: "Tenet", genre: "Sci-Fi, Action", duration: "2h 30m" },
-    { id: 8, title: "The Matrix", genre: "Sci-Fi, Action", duration: "2h 16m" },
+    { id: 1, title: "Inception", genre: "Sci-Fi,Action", duration: "2h 28m" ,posterUrl: "src/components/titles/inception.jpg"},
+    { id: 2, title: "The Dark Knight", genre: "Action", duration: "2h 32m" ,posterUrl: "src/components/titles/dark knight.jpg"},
+    { id: 3, title: "Interstellar", genre: "Sci-fi/Adventure", duration: "2h 49m" ,posterUrl: "src/components/titles/interstellar.jpg"},
+    { id: 4, title: "The Shawshank Redemption", genre: "Comedy,Romance", duration: "2h 16m",posterUrl: "src/components/titles/TSR.jpg" },
+    { id: 5, title: "churuli",genre: "Horror/Mystery", duration: "2h 12m", posterUrl: "src/components/titles/churuli.jpg" },
+    { id: 6, title: "Taxi driver", genre: "Crime,Noir", duration: "1h 53m", posterUrl: "src/components/titles/taxi driver.jpg"},
+    { id: 7, title: "The pursuit of happiness", genre: "Family,Drama", duration: "1h 57m",posterUrl: "src/components/titles/poh.jpg" },
+    { id: 8, title: "Fight Club", genre: "Dram, Thriller", duration: "2h 19m" ,posterUrl: "src/components/titles/fight club.jpg"},
   ];
+
+
+
+  
 
   return (
     <div className="bg-gray-900 text-white min-h-screen">
       
       <section className="relative w-full h-80 bg-gradient-to-r from-purple-600 to-blue-600">
         <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-5">
-          <h1 className="text-4xl font-bold mb-4">Welcome to Cinepass</h1>
+          <h1 className="text-4xl font-bold mb-4">Welcome to CineThinks..</h1>
           <p className="text-lg">Book tickets for your favorite movies, shows, and events!</p>
           <button className="mt-5 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg">
             Explore Now
@@ -50,12 +56,12 @@ export const Home = () => {
               key={movie.id}
               className="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition duration-300"
             >
-              <div className="bg-gray-700 h-48 rounded-lg mb-4"></div>
+              <img src={movie.posterUrl} alt={movie.title} className="w-full h-48 object-cover rounded-lg mb-4" />
               <h3 className="text-lg font-semibold">{movie.title}</h3>
               <p className="text-sm text-gray-400">{movie.genre} • {movie.duration}</p>
-              <button className="mt-3 w-full bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg">
+              <Link to={"/Movies"}><button  className="mt-3 w-full bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg">
                 Book Now
-              </button>
+              </button></Link>
             </div>
           ))}
         </div>

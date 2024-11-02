@@ -1,28 +1,27 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AxiosInstance } from "../config/AxiosInstance";
 
-export const useFetch = async() => {
-    
-    const [data,setData] = useState([]);
-    const [isLoading,setLoading] = useState(true)
-try {
-    const fetchData = await AxiosInstance
-    ({
-        method:"GET",
-        url:"/movie/get-movies"
-    })
+export const useFetch = (url) => {
+  const [datas, setDatas] = useState();
+  const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const fetchData = async () => {
+    try {
+      const response = await AxiosInstance({
+        method: "GET",
+        url: url,
+      });
+      console.log(response);
+      setDatas(response?.data?.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    setData(fetchData.data.movieList)
-    console.log(fetchData,("===fetchdata"));
-    
-} catch (error) {
-    console.log(error);
-    
-}
-
-useEffect(()=>{
- fetchData()
-},[]) 
-    
- return [data,isLoading]
-}
+  return [datas, isLoading, error];
+};

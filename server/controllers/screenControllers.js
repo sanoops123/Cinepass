@@ -35,7 +35,7 @@ export const getAllScreens = async (req, res, next) => {
 
 export const getScreenById = async (req, res, next) => {
   try {
-    console.log("Screen ID:", req.params.screenId); // Log the screen ID
+    console.log("Screen ID:", req.params.id); // Log the screen ID
     const screen = await Screen.findById(req.params.id).populate(
       "movieSchedules.movieId",
       "title"
@@ -43,7 +43,7 @@ export const getScreenById = async (req, res, next) => {
     if (!screen) {
       return res.status(404).json({ message: "Screen not found" });
     }
-    res.status(200).json({ message: "got a screen", screen });
+    res.status(200).json({ message: "got a screen", data: screen });
   } catch (error) {
     res.status(500).json({ message: "Error fetching screen details", error });
   }
@@ -74,5 +74,23 @@ export const deleteScreen = async (req, res, next) => {
     res.status(200).json({ message: "Screen deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting screen", error });
+  }
+};
+
+export const getScreensByMovieId = async (req, res, next) => {
+  try {
+    const { movieId } = req.params;
+
+    const screens = await Screen.find({
+      "movieSchedules.movieId": movieId
+    }).populate("movieSchedules.movieId", "title");
+
+    if (!screens || screens.length === 0) {
+      return res.status(404).json({ message: "No screens found for this movie",});
+    }
+
+    res.status(200).json({ message: "Screens found", data: screens });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching screens", error });
   }
 };

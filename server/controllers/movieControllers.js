@@ -42,7 +42,7 @@ export const addMovie = async (req, res, next) => {
 export const getMovies = async (req, res, next) => {
   try {
     const movieList = await Movie.find();
-    res.status(200).json({ message: "Movie fetched",movieList });
+    res.status(200).json({ message: "Movie fetched",data:movieList });
  } catch (error) {
    res.status(500).json({ message: 'Error fetching movies', error });
  }
@@ -63,7 +63,7 @@ export const getMovieById = async (req, res, next) => {
 
     res.status(200).json({
       message: "Got the movie you are looking for",
-      movie,
+      data:movie,
     });
   } catch (error) {
     console.error("Error fetching movie by ID:", error); 

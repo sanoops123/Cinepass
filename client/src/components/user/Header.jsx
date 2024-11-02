@@ -18,7 +18,7 @@ export const Header = ({}) => {
       <div className="container mx-auto flex justify-between items-center py-4 px-6 ">
        
         <div className="text-2xl font-bold">
-          <Link to={'/'} className="text-white"><h1 className='font-bold'>CinePass</h1><h6>.com</h6></Link>
+          <Link to={'/'} className="text-white"><h1 className='font-bold'>CineThinks..</h1></Link>
         </div>
 
    

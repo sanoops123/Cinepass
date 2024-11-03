@@ -5,6 +5,7 @@ export const useFetch = (url) => {
   const [datas, setDatas] = useState();
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  
   const fetchData = async () => {
     try {
       const response = await AxiosInstance({

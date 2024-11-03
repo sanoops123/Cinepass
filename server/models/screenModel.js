@@ -33,11 +33,12 @@ const screenSchema = new mongoose.Schema({
         required: true,
       },
       showTime: {
-        type:Array,
+        type:[String],
         required:true
       },
       showDate:{
-        type:Array,
+        type:Date,
+        default :Date.now,
         required:true,
       },
     },

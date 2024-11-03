@@ -14,6 +14,7 @@ import { ProtectRoute } from "./ProtectRoute.jsx";
 import { FetchMovieDetails } from "../pages/user/FetchMovieDetails.jsx";
 import { Screens} from "../pages/user/Screens.jsx";
 //import { MovieScreens } from "../pages/user/MovieScreens.jsx";
+import {Bookings} from "../pages/user/Bookings.jsx"
 
 
 
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
        path:"Movies/movie-details/:id/Screens",
         element:<Screens/>
       },
+      {
+      path:"Movies/movie-details/:id/Screens/Bookings",
+      element:<Bookings/>
+      }
       ],
     
     },

@@ -79,21 +79,26 @@ export const deleteScreen = async (req, res, next) => {
 
 export const getScreensByMovieId = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { movieId } = req.params;
 
-    console.log('===movie id',id);
-    
+    console.log('===movie id:', movieId);
 
+    // Find screens that have a schedule for the specified movie ID
     const screens = await Screen.find({
-      "movieSchedules.movieId": id
+      "movieSchedules.movieId": movieId
     }).populate("movieSchedules.movieId", "title");
 
+    console.log("screens==", screens);
+
+   
+
     if (!screens || screens.length === 0) {
-      return res.status(404).json({ message: "No screens found for this movie",});
+      return res.status(404).json({ message: "No screens found for this movie" });
     }
 
-    res.status(200).json({ message: "Screens found", data: screens });
+    res.status(200).json({ message: "Screens found", data: screens, });
   } catch (error) {
+    console.error("Error fetching screens:", error);
     res.status(500).json({ message: "Error fetching screens", error });
   }
 };

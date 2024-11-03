@@ -11,7 +11,7 @@ router.get('/get-screens', getAllScreens);
 
 router.get('/screenbyid/:id',getScreenById)
 
-router.get('/by-movie/:id', getScreensByMovieId);
+router.get('/by-movie/:movieId', getScreensByMovieId);
 
 router.put('/update-screen/:id',authAdmin,updateScreen)
 

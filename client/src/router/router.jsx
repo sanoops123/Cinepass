@@ -17,8 +17,8 @@ import { Seats } from "../pages/user/Seats.jsx";
 import { Bookings } from "../pages/user/Bookings.jsx";
 import { Payment } from "../pages/user/Payment.jsx";
 import { PaymentSuccess } from "../pages/user/paymentSuccess.jsx";
-
-
+import { AdminLayout } from "../layout/AdminLayout.jsx";
+import { MoviesPage } from "../pages/admin/MoviesPage.jsx";
 
 
 export const router = createBrowserRouter([
@@ -110,8 +110,9 @@ export const router = createBrowserRouter([
      
        ]
       },
-    {
-      path:"admin",
+   {
+      path:"/admin",
+      element:<AdminLayout/>,
       children:[
         {
           path:"login",
@@ -120,7 +121,14 @@ export const router = createBrowserRouter([
         {
           path:"signup page",
           element:<SignUpPage role="admin"/>
+        },
+        {
+           path:"movies",
+           element:<MoviesPage/>
         }
       ]
     }
+   
+    
+      
   ]);

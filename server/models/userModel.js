@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema(
       mobile:{
        type: String,
        required:true,
+       minLength:10,
     },
 
     bookings:{

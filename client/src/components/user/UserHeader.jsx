@@ -65,9 +65,6 @@ export const UserHeader = () => {
       <div className="hidden md:flex items-center space-x-4">
       <Link to={''} onClick={logOut}  className=" bg-red-700 text-white hover:bg-red-800 px-4 py-2 rounded-md">Log Out </Link>
       </div>
-      
-       
-
        
     
   </div>

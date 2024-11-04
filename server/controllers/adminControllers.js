@@ -41,7 +41,7 @@ export const adminSignup = async (req, res, next) => {
 
       return res
         .status(200)
-        .json({ message: "user registration successfull", savedAdmin, token });
+        .json({ message: "Admin registration successfull", savedAdmin, token });
     }
     return res.status(400).json({ error: "something went wrong!" });
   } catch (error) {

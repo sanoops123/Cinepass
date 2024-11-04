@@ -4,7 +4,6 @@ import Stripe from 'stripe';
 const router = express.Router();
 const stripe = new Stripe(process.env.VITE_STRIPE_Secret_Key) ; // Replace with your actual Stripe secret key
 
-console.log(stripe,"===stripe");
 
 router.post("/create-payment-intent", async (req, res) => {
   try {
@@ -20,7 +19,7 @@ router.post("/create-payment-intent", async (req, res) => {
       amount: amount * 100, // Convert amount to the smallest currency unit (e.g., paise for INR)
       currency: "inr",
     });
-    console.log(paymentIntent,"===paymntintent");
+    
     
 
     res.send({ clientSecret: paymentIntent.client_secret });

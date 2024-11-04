@@ -17,14 +17,14 @@ export const Movies = () => {
       {loading ? (
         <MoviesLoading />
       ) : (
-        movies.map((movie) => (
+        (movies || []).map((movie) => (
           <div
             key={movie._id}
             onClick={() => viewTickets(movie._id)}
             className="bg-white rounded-lg shadow-lg overflow-hidden w-80 transform transition duration-300 hover:scale-105 cursor-pointer"
           >
             <img
-              src={movie.posterUrl || "/default-poster.jpg"} // Placeholder image
+              src={movie.posterUrl || "/default-poster.jpg"} 
               alt={movie.title}
               className="w-full h-48 object-cover"
             />

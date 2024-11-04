@@ -1,15 +1,14 @@
-
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { AxiosInstance } from "../../config/AxiosInstance.jsx";
 
-const stripePublicKey = "import.meta.env.Publishable_Key";
+const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 console.log("Stripe Publishable Key:", stripePublicKey);
 const stripePromise = loadStripe(stripePublicKey);
 
-export const PaymentForm = ({ movieId, title, showDate, theater, city, time, seats }) => {
+export const PaymentForm = ({ movieId, title, showDate, theater, city, time, seats=[] }) => {
 
 
   const stripe = useStripe();

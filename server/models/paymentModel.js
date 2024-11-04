@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose";
 
-const tickeBookedSchema = new mongoose.schema({
+const paymentSchema = new mongoose.Schema({
   movieId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "movie",
@@ -21,11 +21,11 @@ const tickeBookedSchema = new mongoose.schema({
     required: true,
   },
   showDate: {
-    type: Number,
+    type: Date, // Use Date type for dates
     required: true,
   },
   showTime: {
-    type: Number,
+    type: String, // Use String type for specific time representations
     required: true,
   },
   totalAmount: {
@@ -38,4 +38,5 @@ const tickeBookedSchema = new mongoose.schema({
     required: true,
   },
 });
-export const Ticket = mongoose.model("Ticket", tickeBookedSchema);
+
+export const Payment  = mongoose.model("Payment", paymentSchema);

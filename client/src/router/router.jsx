@@ -13,8 +13,10 @@ import { Profile } from "../pages/user/Profile.jsx";
 import { ProtectRoute } from "./ProtectRoute.jsx";
 import { FetchMovieDetails } from "../pages/user/FetchMovieDetails.jsx";
 import { Screens} from "../pages/user/Screens.jsx";
-//import { MovieScreens } from "../pages/user/MovieScreens.jsx";
-import {Bookings} from "../pages/user/Bookings.jsx"
+import { Seats } from "../pages/user/Seats.jsx";
+import { Bookings } from "../pages/user/Bookings.jsx";
+import { Payment } from "../pages/user/Payment.jsx";
+import { PaymentSuccess } from "../pages/user/paymentSuccess.jsx";
 
 
 
@@ -71,9 +73,9 @@ export const router = createBrowserRouter([
         element:<Screens/>
       },
       {
-      path:"Movies/movie-details/:id/Screens/Bookings",
-      element:<Bookings/>
-      }
+      path:"Movies/movie-details/:id/Screens/Seats",
+      element:<Seats/>
+      },
       ],
     
     },
@@ -85,13 +87,29 @@ export const router = createBrowserRouter([
       path:"profile",
       element:<Profile/>
      },
-   
      {
       path:"my-bookings",
-      element:<h2>my bookings</h2>
-     }
+      element:<Bookings/>
+     },
+     
     ]
+
     },
+    {
+      path:"Movies",
+      element:<ProtectRoute/>,
+      children:[{
+     
+        path:"/Movies/movie-details/:movieId/Screens/Seats/Payment",
+        element:<Payment/>
+      },
+        {
+       path:"/Movies/movie-details/:movieId/Screens/Seats/Payment/Payment-success",
+       element:<PaymentSuccess/>
+        },
+     
+       ]
+      },
     {
       path:"admin",
       children:[

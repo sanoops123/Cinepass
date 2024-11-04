@@ -3,10 +3,13 @@ import {useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 import { AxiosInstance } from '../../config/AxiosInstance.jsx';
 import toast from 'react-hot-toast'
+import { useLocation } from 'react-router-dom';
 
 export const LoginPage = ({role = "user"}) => {
  const {register , handleSubmit} = useForm();
  const navigate = useNavigate()
+ const location = useLocation();
+  const { message } = location.state || {}; // Get message from state
 
 const user ={
   role:"user",
@@ -78,12 +81,17 @@ if (role==="admin"){
             Log In
           </button>
         </form>
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">Don't have an account? <a href="/signup" className="text-red-600 hover:underline">Sign up</a></p>
-        </div>
-        
+        {message && (
+      <div className="alert alert-warning">
+        {message}
       </div>
-    </div>
+    )}
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-600">Don't have an account? <a href="/signup" className="text-red-600 hover:underline">Register</a></p>
+        </div>
+        </div>
+      </div>
+    
   );
 };
 

@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose'
 
-const seatSchema = new Schema({
+const seatSchema = new mongoose.Schema({
   seatNumber: {
     type: String,
     required: true,
@@ -24,5 +23,4 @@ const seatSchema = new Schema({
     required: true,
   }
 });
-
-module.exports = mongoose.model('Seat', seatSchema);
+export const Seat = mongoose.model("Seat", seatSchema);

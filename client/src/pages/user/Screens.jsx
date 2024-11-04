@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../config/AxiosInstance.jsx";
+
 
 const cities = ["Kochi", "Thiruvananthapuram", "Alappuzha", "Thrissur"]; 
 
@@ -10,8 +11,10 @@ export const Screens = () => {
   const [screens, setScreens] = useState([]);
   const { id } = useParams(); 
   const navigate = useNavigate();
+  const location = useLocation()
+  const { title } = location.state || {};
 
- 
+
   const fetchScreens = async () => {
     try {
       const response = await AxiosInstance.get(`/screen/by-movie/${id}`);
@@ -25,14 +28,29 @@ export const Screens = () => {
     fetchScreens();
   }, [id]); 
 
+  console.log(id,"===idd");
+  
   
   const filteredScreens = screens.filter(screen => screen.city === selectedCity);
 
-  const goToBookingPage = (screen, time, showDate) => {
-    navigate(`/Movies/movie-details/${id}/Screens/Booking`, {
-      state: { city: selectedCity, screen, time, showDate }
+ console.log(screens,"screen");
+ 
+  const goToBookingPage = (screen, time, showDate,) => {
+    navigate(`/Movies/movie-details/${id}/Screens/Seats`, {
+      state: {
+        movieId: id, 
+        title,
+        theater: screen, 
+        time, 
+        showDate, 
+        city: selectedCity
+      }
     });
   };
+
+  
+  
+  
 
   return (
     <div className="bg-gray-100 min-h-screen p-6">

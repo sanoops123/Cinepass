@@ -10,9 +10,15 @@ export const ProtectRoute = () => {
    console.log("userAuthorizeddd ====" ,userAuthorized);
    
 
+ 
+   useEffect(()=>{
     if (!userAuthorized){
-        navigate("/login")
-       }
+      navigate("/login",{
+        state:{message:"You need to log in or sign up to access that page and try again !.."}
+      })
+     }
+   },[])
+   
 
    
 

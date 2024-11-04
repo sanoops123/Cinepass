@@ -8,10 +8,22 @@ export const FetchMovieDetails = () => {
   const { id } = useParams();
   const [movie, loading, error] = useFetch(`/movie/movie-byid/${id}`);
 
+
+  if (!movie) return <p>No movie found.</p>;
+  console.log("movie===",movie.title);
+
+  console.log(id,"id===");
+  
+  
   // Function to navigate to booking page
   const viewScreens = () => {
-    navigate(`/Movies/movie-details/${id}/Screens`);
+    navigate(`/Movies/movie-details/${id}/Screens`,{
+      state: {
+        title: movie.title,
+      }
+    });
   };
+
 
   return (
     <div className="flex p-6">

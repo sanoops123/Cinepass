@@ -31,7 +31,7 @@ export const AdminHeader = () => {
             <div className="container mx-auto flex justify-between items-center">
                 <h1 className="text-xl font-bold">Admin Dashboard</h1>
                 <nav>
-                    <Link to="/movies" className={`mr-4 ${location.pathname === '/admin/movies' ? 'underline' : ''}`}>
+                    <Link to="admin/movies" className={`mr-4 ${location.pathname === '/admin/movies' ? 'underline' : ''}`}>
                         Movies
                     </Link>
                     <Link to="/admin/add-movie" className={`mr-4 ${location.pathname === '/admin/add-movie' ? 'underline' : ''}`}>

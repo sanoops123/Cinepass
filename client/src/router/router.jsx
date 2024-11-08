@@ -123,7 +123,7 @@ export const router = createBrowserRouter([
           element:<SignUpPage role="admin"/>
         },
         {
-           path:"movies",
+           path:"admin/movies",
            element:<MoviesPage/>
         }
       ]

@@ -12,7 +12,10 @@ export const Screens = () => {
   const { id } = useParams(); 
   const navigate = useNavigate();
   const location = useLocation()
-  const { title } = location.state || {};
+  const { title,poster } = location.state || {};
+
+  console.log("title==",title);
+  console.log("poster==",poster);
 
 
   const fetchScreens = async () => {
@@ -38,6 +41,7 @@ export const Screens = () => {
   const goToBookingPage = (screen, time, showDate,) => {
     navigate(`/Movies/movie-details/${id}/Screens/Seats`, {
       state: {
+        poster,
         movieId: id, 
         title,
         theater: screen, 
@@ -55,7 +59,8 @@ export const Screens = () => {
   return (
     <div className="bg-gray-100 min-h-screen p-6">
       <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">Theatres in {selectedCity}</h1>
+      <h1 className="text-2xl font-bold text-gray-500 mb-4">{title}</h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-4">Theatres in {selectedCity} </h1>
 
         <div className="mb-4">
           <label htmlFor="city-select" className="block text-sm font-medium text-gray-700">

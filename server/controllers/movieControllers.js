@@ -120,3 +120,18 @@ export const getUpcomingMovies = async (req, res, next) => {
     res.status(500).json({ message: "Error fetching upcoming movies", error });
   }
 };
+
+export const searchMovies = async (req, res, next) => {
+  try {
+    const { q } = req.query; // Extract the search term from query parameters
+
+    const searchMovies = await Movie.find({
+      title: { $regex: q, $options: 'i' } // Use 'q' as the search term for the title
+    });
+
+    res.status(200).json({ message: "Got the movie you searched for", searchMovies });
+    console.log(searchMovies);
+  } catch (error) {
+    res.status(500).json({ message: 'Error searching for movies', error });
+  }
+};

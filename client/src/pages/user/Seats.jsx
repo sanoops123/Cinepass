@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const rowLabels = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
-const seatsPerRow = 20; // You can adjust this number based on your layout
+const seatsPerRow = 20; 
 const seatPrice = 150;
 
 export const Seats = () => {
   const location = useLocation()
   const navigate = useNavigate();
   
-  const { movieId, title, theater, city, time ,showDate} = location.state || {};
+  const { movieId, title, theater, city, time ,showDate,poster} = location.state || {};
 
   console.log(movieId,"movieiddd");
   console.log("Title:", title);
@@ -18,6 +18,7 @@ export const Seats = () => {
   console.log("Time:", time);
   console.log("city",city);
   console.log("date",showDate);
+  console.log("poster",poster);
   
   
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -55,7 +56,7 @@ export const Seats = () => {
           <React.Fragment key={i}>
             {renderSeat(row, i + 1)}
             {(i + 1) % 7 === 0 && i + 1 !== seatsPerRow && (
-              <div className="w-4" /> // Spacer after every 8 seats
+              <div className="w-4" /> 
             )}
           </React.Fragment>
         ))}
@@ -65,9 +66,9 @@ export const Seats = () => {
   const totalPrice = selectedSeats.length * seatPrice;
 
   const handleProceedToPayment = () => {
-    // Pass the movieId, theater, time, and selectedSeats to the Payment page
+   
     navigate(`/Movies/movie-details/${movieId}/Screens/Seats/Payment`, {
-      state: { movieId,title,showDate, city,theater, time, seats: selectedSeats }
+      state: { movieId,title,showDate, city,theater,poster, time, seats: selectedSeats }
     });
   };
 

@@ -1,9 +1,8 @@
 import express from 'express'
-import { addMovie, deleteMovie, getMovieById, getMovies, updateMovie,getNowShowingMovies ,getUpcomingMovies} from '../controllers/movieControllers.js'
+import { addMovie, deleteMovie, getMovieById, getMovies, updateMovie,getNowShowingMovies ,getUpcomingMovies,searchMovies} from '../controllers/movieControllers.js'
 import { authAdmin } from '../middleware/authAdmin.js'
-const router =express.Router()
 import { upload } from "../middleware/multer.js";
-
+const router =express.Router()
 
 router.post("/add-movies", upload.single('posterUrl'),authAdmin, addMovie)
 
@@ -19,5 +18,6 @@ router.get("/now-showing", getNowShowingMovies)
 
 router.get("/upcoming",getUpcomingMovies )
 
+router.get('/search',searchMovies)
 
 export {router as moviesRouter}

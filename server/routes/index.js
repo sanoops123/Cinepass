@@ -10,6 +10,7 @@ import {seatRouter} from "./seatRoute.js"
 import { paymentRoute } from './paymentRoute.js'
 
 
+
 router.use("/user",userRouter)
 router.use("/admin",adminRouter)
 router.use("/movie",moviesRouter)

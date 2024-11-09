@@ -11,19 +11,22 @@ export const FetchMovieDetails = () => {
 
   if (!movie) return <p>No movie found.</p>;
   console.log("movie===",movie.title);
+  console.log("poster===",movie.posterUrl);
 
   console.log(id,"id===");
   
   
-  // Function to navigate to booking page
+  
   const viewScreens = () => {
     navigate(`/Movies/movie-details/${id}/Screens`,{
       state: {
         title: movie.title,
+        poster : movie.posterUrl
       }
     });
   };
 
+  
 
   return (
     <div className="flex p-6">

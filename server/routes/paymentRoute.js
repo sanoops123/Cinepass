@@ -2,7 +2,11 @@ import express from 'express';
 import Stripe from 'stripe';
 
 const router = express.Router();
-const stripe = new Stripe(process.env.VITE_STRIPE_Secret_Key) ; // Replace with your actual Stripe secret key
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);// Replace with your actual Stripe secret key
+
+console.log("Is Stripe Key Defined?", Boolean((process.env.STRIPE_SECRET_KEY)));
+
+
 
 
 router.post("/create-payment-intent", async (req, res) => {

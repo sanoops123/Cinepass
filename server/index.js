@@ -12,7 +12,7 @@ connectDB();
 
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:5173", "https://frontend-virid-one-14.vercel.app"],
+  origin: ["http://localhost:5173", "https://frontend-p63kl0ypk-sanoops123s-projects.vercel.app"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 }));

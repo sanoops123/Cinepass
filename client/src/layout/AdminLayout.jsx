@@ -30,6 +30,7 @@ console.log("admin auth ====",adminAuthorized);
 
   useEffect(() => {
     checkAdmin();
+    console.log("Current path:", location.pathname);
   }, [location.pathname]);
 
   return (

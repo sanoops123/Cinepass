@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { AxiosInstance } from '../../config/AxiosInstance.jsx';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { saveUser } from '../../redux/features/userSlice.jsx';
 
 export const SignUpPage = () => {
   const { register, handleSubmit } = useForm();
@@ -16,6 +18,8 @@ export const SignUpPage = () => {
     login_route: role === "admin" ? "/admin/log-in" : "/user/log-in",
      Home_route: role === "admin" ? "/admin" : "/"
   };
+ 
+   const dispatch = useDispatch()
 
   const onSubmit = async (data) => {
     try {
@@ -25,6 +29,7 @@ export const SignUpPage = () => {
         data
       });
       console.log("response===", response);
+      dispatch(saveUser(response.data));
       toast.success("Sign-up Successful!", { position: "bottom-center" });
       navigate(user.Home_route); 
     } catch (error) {

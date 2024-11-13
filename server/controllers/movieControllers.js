@@ -1,44 +1,6 @@
-import { cloudinaryInstance } from "../config/cloudinaryConfig.js";
 import { Movie } from "../models/moviesModel.js";
 import { handleImageUpload } from "../utils/cloudinary.js";
 
-export const addMovie = async (req, res, next) => {
-  try {
-      let imageUrl;
-      
-      const { title, description,posterUrl,trailerUrl,genre,releaseDate,duration} = req.body;
-    
-      console.log("posterUrl====", req.file);
-      console.log("body ===",req.body);
-      
-
-      if (!title,!description,!genre,!releaseDate,!duration,!posterUrl)
-        {
-          return res.status(400).json({message:"all fields are required",})
-        }
-
-        const existingMovie = await Movie.findOne({ title, releaseDate });
-      if (existingMovie) {
-          return res.status(409).json({ message: "Movie already exists" }); 
-      }
-
-      if (req.file) {
-          const cloudinaryRes = await cloudinaryInstance.uploader.upload(req.file.path);
-          imageUrl= cloudinaryRes.url;
-          
-      }
-
-      console.log(imageUrl,'====imageUrl');
-      
-      const newMovie = new Movie({ title, description, duration,genre,releaseDate,posterUrl:imageUrl ||posterUrl }); 
-      await newMovie.save();
-
-      res.status(201).json({ message: "Movie added successfully", data: newMovie });
-  } catch (error) {
-      console.log(error);
-      res.status(401).json({ message :"Error adding movie", error});
-  }
-};
 export const getMovies = async (req, res, next) => {
   try {
     const movieList = await Movie.find();
@@ -48,6 +10,45 @@ export const getMovies = async (req, res, next) => {
  }
 };
 
+
+export const addMovie = async (req, res, next) => {
+    try {
+        const { title, description, trailerUrl, genre, releaseDate, language,duration } = req.body;
+        let imageUrl;
+
+        if (!title || !description || !genre || !releaseDate || !duration) {
+            return res.status(400).json({ message: "all fields are required.." });
+        }
+
+        
+        const existingMovie = await Movie.findOne({ title, releaseDate });
+        if (existingMovie) {
+            return res.status(409).json({ message: "Movie already exists" });
+        }
+
+        
+        if (req.file) {
+            imageUrl = await handleImageUpload(req.file.path);
+        }
+
+        
+        const newMovie = new Movie({
+            title,
+            description,
+            genre,
+            releaseDate,
+            duration,
+            language,
+            posterUrl: imageUrl || req.body.posterUrl, 
+        });
+
+        await newMovie.save();
+        res.status(201).json({ message: "Movie added successfully", data: newMovie });
+    } catch (error) {
+        console.error("Error adding movie:", error);
+        res.status(500).json({ message: "Error adding movie", error: error.message });
+    }
+};
 
 
 export const getMovieById = async (req, res, next) => {
@@ -83,7 +84,7 @@ export const updateMovie = async (req, res, next) => {
     }
     res
       .status(200)
-      .json({ message: "Movie updated successfully", updatedMovie });
+      .json({ message: "Movie updated successfully", data:updatedMovie });
   } catch (error) {
     res.status(400).json({ message: "Error updating movie", error });
   }

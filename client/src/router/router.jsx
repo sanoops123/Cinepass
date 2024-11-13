@@ -18,8 +18,9 @@ import { Bookings } from "../pages/user/Bookings.jsx";
 import { Payment } from "../pages/user/Payment.jsx";
 import { PaymentSuccess } from "../pages/user/paymentSuccess.jsx";
 import { AdminLayout } from "../layout/AdminLayout.jsx";
+import { AddMovies } from "../pages/admin/AddMovies.jsx";
+import { MovieEditPage } from "../pages/admin/MovieEditPage.jsx";
 import { MoviesPage } from "../pages/admin/MoviesPage.jsx";
-
 
 export const router = createBrowserRouter([
     {
@@ -45,11 +46,11 @@ export const router = createBrowserRouter([
           element : <About/>
         },
         {
-          path:'Movies',
+          path:'movies',
           element:<Movies/>
         },
         {
-        path:"Movies/movie-details/:id",
+        path:"movies/movie-details/:id",
         element:<FetchMovieDetails/>
         },
         {
@@ -64,10 +65,7 @@ export const router = createBrowserRouter([
         path:'Plays',
         element:<Plays/>
       },
-      {
-      path:'profile',
-      element:<Profile/>
-      },
+     
       {
        path:"Movies/movie-details/:id/Screens",
         element:<Screens/>
@@ -104,31 +102,38 @@ export const router = createBrowserRouter([
         element:<Payment/>
       },
         {
-       path:"/Movies/movie-details/:movieId/Screens/Seats/Payment/Payment-success",
+       path:"/Movies/movie-details/:movieId/Screens/Seats/Payment/PaymentSuccess",
        element:<PaymentSuccess/>
         },
      
        ]
       },
-   {
-      path:"/admin",
-      element:<AdminLayout/>,
-      children:[
-        {
-          path:"login",
-          element:<LoginPage role="admin"/>
-        },
-        {
-          path:"signup page",
-          element:<SignUpPage role="admin"/>
-        },
-        {
-           path:"admin/movies",
-           element:<MoviesPage/>
-        }
-      ]
-    }
-   
-    
+      {
+        path: "admin",
+        element: <AdminLayout />,
+        children: [
+          {
+            path: "login",
+            element: <LoginPage role="admin" />
+          },
+          {
+            path: "signup",
+            element: <SignUpPage role="admin" />
+          },
+          {
+            path: "moviespage",
+            element: <MoviesPage/>
+          },
+          {
+            path: "add-movie",
+            element: <AddMovies/>
+          },
+          {
+            path:"moviespage/movie-edit/:id",
+            element:<MovieEditPage/>
+          }
+        ]
+      }
+      
       
   ]);

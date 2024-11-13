@@ -17,7 +17,7 @@ router.post("/log-out",authUser,userLogOut)
 
 router.get("/check-user",authUser,checkUser)
 
-router.get("/my-bookings/:userId",getBookingsByUser)
+router.get("/my-bookings/:userId", authUser,getBookingsByUser)
 
 
 export {router as userRouter}

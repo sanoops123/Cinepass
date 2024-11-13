@@ -39,7 +39,7 @@ export const Screens = () => {
  console.log(screens,"screen");
  
   const goToBookingPage = (screen, time, showDate,) => {
-    navigate(`/Movies/movie-details/${id}/Screens/Seats`, {
+    navigate(`/movies/movie-details/${id}/Screens/Seats`, {
       state: {
         poster,
         movieId: id, 

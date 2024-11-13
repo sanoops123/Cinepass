@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { AxiosInstance } from '../../config/AxiosInstance.jsx';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { saveUser } from '../../redux/features/userSlice.jsx';
 
 export const LoginPage = () => {
     const [role, setRole] = useState("user"); 
@@ -19,6 +21,8 @@ export const LoginPage = () => {
          Home_route: role === "admin" ? "/admin" : "/"
     };
 
+    const dispatch = useDispatch();
+
     const onSubmit = async (data) => {
         try {
             const response = await AxiosInstance({
@@ -27,6 +31,7 @@ export const LoginPage = () => {
                 data
             });
             console.log("response===", response);
+            dispatch(saveUser(response.data));
             toast.success("Login Successful ..", { position: "bottom-center" });
             navigate(user.Home_route); 
         } catch (error) {

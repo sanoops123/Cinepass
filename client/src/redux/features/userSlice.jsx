@@ -14,10 +14,12 @@ export const userSlice = createSlice({
   reducers: {
     saveUser: (state, action) => {
       state.user = action.payload;
+      state.user.userId = action.payload._id; 
       state.userAuthorized = true;
     },
     saveAdmin: (state, action) => {
       state.admin = action.payload;
+      //state.admin.adminId = action.payload._id; 
       state.adminAuthorized = true;
     },
     clearUser: (state) => {

@@ -8,8 +8,8 @@ export const Movies = () => {
   const [movies, loading, Error] = useFetch("/movie/get-movies");
   const navigate = useNavigate();
 
-  const viewTickets = (id) => {
-    navigate(`/Movies/movie-details/${id}`);
+  const viewTickets = (movieId) => {
+    navigate(`/movies/movie-details/${movieId}`);
   };
 
   return (
@@ -32,6 +32,7 @@ export const Movies = () => {
               <h2 className="text-lg font-bold text-gray-800">{movie.title}</h2>
               <p className="text-gray-600 text-sm mt-2 line-clamp-3">{movie.description}</p>
               <p className="mt-3 text-sm text-gray-500"><strong>Genre:</strong> {movie.genre}</p>
+              <p className="text-sm text-gray-500"><strong>Language:</strong> {movie.language} </p>
               <p className="text-sm text-gray-500"><strong>Release Date:</strong> {new Date(movie.releaseDate).toDateString()}</p>
               <p className="text-sm text-gray-500"><strong>Duration:</strong> {movie.duration} mins</p>
             </div>

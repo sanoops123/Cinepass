@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch.jsx";
 
+
 export const FetchMovieDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -18,7 +19,7 @@ export const FetchMovieDetails = () => {
   
   
   const viewScreens = () => {
-    navigate(`/Movies/movie-details/${id}/Screens`,{
+    navigate(`/movies/movie-details/${id}/Screens`,{
       state: {
         title: movie.title,
         poster : movie.posterUrl

@@ -94,7 +94,7 @@ export const userProfile = async (req, res, next) => {
 
     const userData = await User.findById(user.id).select("-password");
 
-    return res.status(200).json({ message: "user profile fetched!", userData });
+    return res.status(200).json({ message: "user profile fetched!",data: userData });
   } catch (error) {
     console.log(error);
     return res
@@ -137,7 +137,7 @@ export const getBookingsByUser = async (req, res,next) => {
   try {
     const userId = req.params.userId;
     const userBookings = await Booking.find({ userId }).populate('movieId', 'title releaseDate');
-    res.status(200).json({message:"my Bookings",userBookings});
+    res.status(200).json({message:"my Bookings",data:userBookings});
   } catch (error) {
     res.status(500).json({ message: 'Error fetching bookings for user', error });
   }

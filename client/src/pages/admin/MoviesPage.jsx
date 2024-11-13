@@ -8,8 +8,8 @@ export const MoviesPage = () => {
   const [movies, loading, Error] = useFetch("/movie/get-movies");
   const navigate = useNavigate();
 
-  const viewTickets = (id) => {
-    navigate(`/Movies/movie-details/${id}`);
+  const editMovie = (id) => {
+    navigate(`/admin/moviespage/movie-edit/${id}`); 
   };
 
   return (
@@ -20,7 +20,7 @@ export const MoviesPage = () => {
         (movies || []).map((movie) => (
           <div
             key={movie._id}
-            onClick={() => viewTickets(movie._id)}
+            onClick={() => editMovie(movie._id)} 
             className="bg-white rounded-lg shadow-lg overflow-hidden w-80 transform transition duration-300 hover:scale-105 cursor-pointer"
           >
             <img

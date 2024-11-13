@@ -25,7 +25,7 @@ const bookingSchema = new mongoose.Schema({
   },
   seats: [
     {
-      row: {
+     /* row: {
         type: String,
         required: true,
       },
@@ -40,7 +40,7 @@ const bookingSchema = new mongoose.Schema({
       price: {
         type: Number,
         required: true,
-      },
+      },*/
     },
   ],
   totalPrice: {

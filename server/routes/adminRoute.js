@@ -5,17 +5,16 @@ const router = express.Router()
 
 router.post("/sign-up",adminSignup)
 
-router.post("/log-in", adminLogin )
+router.post("/log-in",adminLogin )
 
 router.get("/profile",authAdmin,adminProfile)
 
-router.put("/profile-update",)
+router.put("/profile-update",authAdmin)
 
-router.delete("/profile-delete",)
+router.delete("/profile-delete", authAdmin)
 
 router.post("/log-out",authAdmin,adminLogOut)
 
 router.get("/check-admin",authAdmin,checkAdmin)
-
 
 export {router as adminRouter}

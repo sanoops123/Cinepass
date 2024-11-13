@@ -18,6 +18,8 @@ export const useFetch = (url) => {
     } catch (error) {
       console.log(error);
       setError(error);
+    }finally{
+      setLoading(false)
     }
   };
   useEffect(() => {

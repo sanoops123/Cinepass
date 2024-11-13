@@ -66,8 +66,7 @@ export const Seats = () => {
   const totalPrice = selectedSeats.length * seatPrice;
 
   const handleProceedToPayment = () => {
-   
-    navigate(`/Movies/movie-details/${movieId}/Screens/Seats/Payment`, {
+    navigate(`/movies/movie-details/${movieId}/Screens/Seats/Payment`, {
       state: { movieId,title,showDate, city,theater,poster, time, seats: selectedSeats }
     });
   };

@@ -21,6 +21,10 @@ import { AdminLayout } from "../layout/AdminLayout.jsx";
 import { AddMovies } from "../pages/admin/AddMovies.jsx";
 import { MovieEditPage } from "../pages/admin/MovieEditPage.jsx";
 import { MoviesPage } from "../pages/admin/MoviesPage.jsx";
+import { AdminHome } from "../pages/admin/AdminHome.jsx";
+import { Settings } from "../pages/admin/Settings.jsx";
+import { AdminProfile } from "../pages/admin/AdminProfile.jsx";
+import ScrollToTop from "../components/shared/ScrollToTop.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -47,7 +51,7 @@ export const router = createBrowserRouter([
         },
         {
           path:'movies',
-          element:<Movies/>
+          element:(<><ScrollToTop/> <Movies/></>)
         },
         {
         path:"movies/movie-details/:id",
@@ -122,15 +126,27 @@ export const router = createBrowserRouter([
           },
           {
             path: "moviespage",
-            element: <MoviesPage/>
+            element: (<> <ScrollToTop/>  <MoviesPage/></>)
           },
           {
             path: "add-movie",
             element: <AddMovies/>
           },
           {
+            path:"settings",
+            element:<Settings/>
+          },
+          {
+           path:"profile",
+           element:<AdminProfile/>
+          },
+          {
             path:"moviespage/movie-edit/:id",
             element:<MovieEditPage/>
+          },
+          {
+            path:"Home",
+            element:<AdminHome/>
           }
         ]
       }

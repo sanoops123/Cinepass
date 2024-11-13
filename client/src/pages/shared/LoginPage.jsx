@@ -18,7 +18,7 @@ export const LoginPage = () => {
         login_api: role === "admin" ? "/admin/log-in" : "/user/log-in",
         profile_route: role === "admin" ? "/admin/profile" : "/user/profile",
         signup_route: role === "admin" ? "/admin/sign-up" : "/user/sign-up",
-         Home_route: role === "admin" ? "/admin" : "/"
+         Home_route: role === "admin" ? "/admin/Home" : "/"
     };
 
     const dispatch = useDispatch();

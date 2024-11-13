@@ -23,6 +23,14 @@ export const AdminHeader = () => {
             <div className="container mx-auto flex justify-between items-center px-6">
                 <h1 className="text-2xl font-bold tracking-wide">Admin Dashboard</h1>
                 <nav className="flex space-x-6 items-center">
+                <Link
+                        to="/admin/Home"
+                        className={`text-lg font-medium hover:text-gray-300 transition ${
+                            location.pathname === "/admin/Home" ? "text-blue-400" : ""
+                        }`}
+                    >
+                        Home
+                    </Link>
                     <Link
                         to="/admin/moviespage"
                         className={`text-lg font-medium hover:text-gray-300 transition ${
@@ -40,12 +48,12 @@ export const AdminHeader = () => {
                         Add Movie
                     </Link>
                     <Link
-                        to="/admin/add-screen"
+                        to="/admin/settings"
                         className={`text-lg font-medium hover:text-gray-300 transition ${
                             location.pathname === "/admin/add-screen" ? "text-blue-400" : ""
                         }`}
                     >
-                        Add Screen
+                        Settings
                     </Link>
                     <Link
                         to="/admin/profile"

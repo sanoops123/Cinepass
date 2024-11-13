@@ -5,7 +5,7 @@ import { AxiosInstance } from '../../config/AxiosInstance.jsx';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { saveUser } from '../../redux/features/userSlice.jsx';
+import { saveUser ,saveAdmin} from '../../redux/features/userSlice.jsx';
 
 export const LoginPage = () => {
     const [role, setRole] = useState("user"); 
@@ -32,6 +32,7 @@ export const LoginPage = () => {
             });
             console.log("response===", response);
             dispatch(saveUser(response.data));
+            dispatch(saveAdmin(response.data));
             toast.success("Login Successful ..", { position: "bottom-center" });
             navigate(user.Home_route); 
         } catch (error) {

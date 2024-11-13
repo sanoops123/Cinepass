@@ -88,7 +88,7 @@ export const userLogin = async (req, res, next) => {
   }
 };
 
-export const userProfile = async (req, res, next) => {
+/*export const userProfile = async (req, res, next) => {
   try {
     const { user } = req;
 
@@ -102,6 +102,24 @@ export const userProfile = async (req, res, next) => {
       .json({ error: error.message || "internal server error" });
   }
 };
+*/
+export const userProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id); 
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json({
+      name: user.name,
+      email: user.email,
+      
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 
 
 export const userLogOut = async (req,res,next)=>{
@@ -132,7 +150,7 @@ export const checkUser = async (req,res,next)=>{
     .json({ error: error.message || "internal server error" });
   }
 }
-// Get all bookings for a user
+
 export const getBookingsByUser = async (req, res,next) => {
   try {
     const userId = req.params.userId;
@@ -142,3 +160,32 @@ export const getBookingsByUser = async (req, res,next) => {
     res.status(500).json({ message: 'Error fetching bookings for user', error });
   }
 };
+
+export const updateUserProfile = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.name = name || user.name;
+    user.email = email || user.email;
+
+    
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
+    }
+
+    await user.save();
+
+    res.status(200).json({ message: 'Profile updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+

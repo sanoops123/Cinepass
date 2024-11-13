@@ -29,7 +29,7 @@ const adminSchema = new mongoose.Schema(
       movies: [
         { 
           type: mongoose.Schema.Types.ObjectId, 
-          ref: 'Movie' // Make sure the collection name matches the name used in the referenced schema
+          ref: 'Movie' 
         }
       ]
     

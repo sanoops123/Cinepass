@@ -95,13 +95,13 @@ export const adminProfile = async (req, res, next) => {
   try {
     const { admin } = req;
 
-    const userData = await Admin.findById(admin.id).select("-password");
+    const adminData = await Admin.findById(admin.id).select("-password");
 
-    console.log(userData);
+    console.log(adminData);
 
     return res
       .status(200)
-      .json({ message: "admin profile fetched!", userData });
+      .json({ message: "admin profile fetched!", adminData });
   } catch (error) {
     console.log(error);
     return res
@@ -137,3 +137,38 @@ export const checkAdmin = async (req, res, next) => {
       .json({ error: error.message || "internal server error" });
   }
 };
+
+export const updateAdminProfile = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    console.log(req.admin,"data==");
+    
+    const admin= await Admin.findById(req.admin.id);
+  
+    if (!admin) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    admin.name = name || admin.name;
+    admin.email = email || admin.email;
+
+    
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      admin.password = await bcrypt.hash(password, salt);
+    }
+
+    await admin.save();
+
+    res.status(200).json({ message: 'Profile updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+
+
+

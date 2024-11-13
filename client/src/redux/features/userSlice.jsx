@@ -1,4 +1,3 @@
-
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -19,7 +18,7 @@ export const userSlice = createSlice({
     },
     saveAdmin: (state, action) => {
       state.admin = action.payload;
-      //state.admin.adminId = action.payload._id; 
+      //state.admin = action.payload._id; 
       state.adminAuthorized = true;
     },
     clearUser: (state) => {

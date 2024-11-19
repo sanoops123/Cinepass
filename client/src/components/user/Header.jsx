@@ -54,7 +54,7 @@ export const Header = () => {
           <Link to="/" className="text-white"><h1 className="font-bold">CineThinks..</h1></Link>
         </div>
 
-        {/* Search Input */}
+        
         <div className="hidden md:flex items-center bg-white rounded-md overflow-hidden relative">
           <input
             type="text"

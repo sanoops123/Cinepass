@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { AxiosInstance } from "../../config/AxiosInstance.jsx";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export const Bookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -22,7 +23,11 @@ export const Bookings = () => {
   }, []);
 
   return (
+  
     <div className="min-h-screen bg-gray-100 p-6">
+       <div className="text-2xl font-bold">
+          <Link to="/" className="text-blue-600 "><h1 className="font-bold">CineThinks..</h1></Link>
+        </div>
       <h1 className="text-2xl font-bold mb-4 text-center">My Bookings</h1>
       {bookings.length > 0 ? (
         <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

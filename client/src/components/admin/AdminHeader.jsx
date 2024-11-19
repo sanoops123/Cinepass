@@ -50,7 +50,7 @@ export const AdminHeader = () => {
                     <Link
                         to="/admin/settings"
                         className={`text-lg font-medium hover:text-gray-300 transition ${
-                            location.pathname === "/admin/add-screen" ? "text-blue-400" : ""
+                            location.pathname === "/admin/settings" ? "text-blue-400" : ""
                         }`}
                     >
                         Settings

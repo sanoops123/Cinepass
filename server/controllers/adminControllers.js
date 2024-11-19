@@ -91,7 +91,7 @@ export const adminLogin = async (req, res, next) => {
   }
 };
 
-export const adminProfile = async (req, res, next) => {
+/*export const adminProfile = async (req, res, next) => {
   try {
     const { admin } = req;
 
@@ -101,14 +101,43 @@ export const adminProfile = async (req, res, next) => {
 
     return res
       .status(200)
-      .json({ message: "admin profile fetched!", adminData });
+      .json({ message: "admin profile fetched!", data:adminData });
   } catch (error) {
     console.log(error);
     return res
       .status(error.status || 500)
       .json({ error: error.message || "internal server error" });
   }
+};*/
+export const adminProfile = async (req, res, next) => {
+  try {
+    const { admin } = req;
+
+    if (!admin || !admin.id) {
+      return res.status(400).json({ error: "Invalid admin information" });
+    }
+
+    const adminData = await Admin.findById(admin.id).select("-password");
+
+    if (!adminData) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    console.log(adminData);
+
+    return res.status(200).json({
+      message: "Admin profile fetched successfully!",
+      data: adminData,
+    });
+  } catch (error) {
+    console.error("Error fetching admin profile:", error);
+    return res.status(error.status || 500).json({
+      message: "Failed to fetch admin profile",
+      error: error.message || "Internal server error",
+    });
+  }
 };
+
 
 export const adminLogOut = async (req, res, next) => {
   try {

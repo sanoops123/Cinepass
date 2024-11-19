@@ -1,13 +1,13 @@
+
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { AxiosInstance } from '../../config/AxiosInstance';
-import { useSelector } from 'react-redux'; 
+import { useSelector } from 'react-redux';
+
 export const AdminProfile = () => {
- 
-  const admin= useSelector((state) => state.user.admin); 
-  console.log(admin,"==add");
-  
-  const adminAuthorized = useSelector((state) => state.user.adminAuthorized); 
+  const admin = useSelector((state) => state.user.admin);
+  const adminAuthorized = useSelector((state) => state.user.adminAuthorized);
+
   const [isEditing, setIsEditing] = useState(false);
   const [adminDetails, setAdminDetails] = useState({
     name: '',
@@ -15,30 +15,30 @@ export const AdminProfile = () => {
     password: '',
   });
 
-
- 
   useEffect(() => {
-    if (adminAuthorized && admin._id) {
+    if (adminAuthorized) {
       AxiosInstance.get('/admin/profile')
         .then((response) => {
+          const profileData = response.data.data;
           setAdminDetails({
-            name: response.data.name,
-            email: response.data.email,
+            name: profileData.name || '',
+            email: profileData.email || '',
+            password: '', // Reset password to empty on fetch
           });
         })
         .catch((error) => {
           console.error('Error fetching profile:', error);
+          toast.error('Failed to load profile.');
         });
     }
-  }, [adminAuthorized, admin._id]);
+  }, [adminAuthorized]);
 
-  console.log(admin._id,"===ad id");
   const handleSave = async () => {
     try {
       const updatedAdmin = {
         name: adminDetails.name,
         email: adminDetails.email,
-        password: adminDetails.password || undefined,
+        ...(adminDetails.password && { password: adminDetails.password }), // Only send password if provided
       };
 
       const response = await AxiosInstance.put('/admin/profile-update', updatedAdmin);
@@ -53,7 +53,6 @@ export const AdminProfile = () => {
     }
   };
 
-  
   if (!adminAuthorized) {
     return <div>You must be logged in to view the admin profile.</div>;
   }
@@ -93,12 +92,16 @@ export const AdminProfile = () => {
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2">Password</label>
           <input
-            type="password"
-            value={adminDetails.password}
-            onChange={(e) => setAdminDetails({ ...adminDetails, password: e.target.value })}
+            type="password"  // This makes the password display as stars
+            value={adminDetails.password} // Displays password as stars
+            onChange={(e) =>
+              setAdminDetails({ ...adminDetails, password: e.target.value })
+            }
             className="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            placeholder="Enter new password (optional)"
             disabled={!isEditing}
           />
+          <small className="text-gray-400">Enter a new password to update it.</small>
         </div>
 
         {/* Save and Edit Buttons */}
@@ -131,5 +134,3 @@ export const AdminProfile = () => {
     </div>
   );
 };
-
-

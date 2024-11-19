@@ -37,6 +37,7 @@ export const LoginPage = () => {
             navigate(user.Home_route); 
         } catch (error) {
             toast.error("Login Failed: " + (error.response?.data?.message || "Please try again.")); 
+            navigate("/login")
             console.log(error);
         }
     };

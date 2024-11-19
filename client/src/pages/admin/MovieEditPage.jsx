@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosInstance } from '../../config/AxiosInstance';
 import toast from "react-hot-toast";
-import { LogIn } from 'lucide-react';
 
 export const MovieEditPage = () => {
   const { id } = useParams();
@@ -56,6 +55,11 @@ export const MovieEditPage = () => {
     } catch (error) {
       toast.error("Error updating movie: " + error.message);
     }
+  };
+
+  // Navigate to the 'Create Screen' page for the selected movie
+  const handleCreateScreen = () => {
+    navigate(`/admin/moviespage/create-screen/${id}`);
   };
 
   if (loading) return <div className="text-center text-gray-600">Loading...</div>;
@@ -149,6 +153,14 @@ export const MovieEditPage = () => {
           </button>
         </div>
       </form>
+
+      {/* Create Screen Button */}
+      <button
+        onClick={handleCreateScreen}
+        className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200"
+      >
+        Create Screen for this Movie
+      </button>
     </div>
   );
 };

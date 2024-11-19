@@ -1,44 +1,35 @@
 import { Booking } from "../models/bookingModel.js";
 import { Movie } from "../models/moviesModel.js";
 
-export const movieBooking = async (req, res, next) => {
+export const movieBooking = async (req, res) => {
   try {
-   
+    const { movieId, showDate, theater, showTime, title, city, seats, totalPrice } = req.body;
+    const userId = req.user?.id;
 
-    const { title, showDate, movieId, seats,userId, showTime, totalPrice, paymentType } = req.body;
+    console.log("Booking Request: ", { movieId, userId, showDate, theater, showTime, title, city, seats, totalPrice });
 
-    console.log("useridd===",userId);
-    
-    // Check if any required field is missing
-    if (!title || !showDate || !showTime || !movieId || !seats || !totalPrice || !userId || !paymentType) {
-      return res.status(400).json({ message: "Booking not completed. Missing required fields." });
+    if (!movieId || !userId || !showDate || !title || !seats || seats.length === 0) {
+      return res.status(400).json({ message: "Missing required booking details" });
     }
 
-    // Find the movie by ID
-    const movie = await Movie.findById(movieId);
-    if (!movie) {
-      return res.status(404).json({ message: "Movie not found" });
-    }
-
-    // Create a new booking entry
-    const newBooking = new Booking({
+    const booking = new Booking({
       movieId,
-      title,
-      userId,  // Add the userId to associate the booking with a user
-      seats,
-      showTime,
+      userId,
       showDate,
+      theatre: theater, // Use the correct schema field name
+      showTime,
+      city,
+      seats,
       totalPrice,
-      paymentType,
-      bookingDate: new Date(),
+      title,
     });
 
-    // Save the new booking to the database
-    await newBooking.save();
-
-    res.status(201).json({ message: "Booking successfully created", newBooking });
+    await booking.save();
+    console.log("Booking saved:", booking);
+    res.status(201).json({ message: "Booking successful", data: booking });
   } catch (error) {
-    res.status(500).json({ message: "Error creating booking", error });
+    console.error("Booking error:", error);
+    res.status(500).json({ message: "Failed to book movie", error });
   }
 };
 
@@ -55,6 +46,8 @@ export const movieBooking = async (req, res, next) => {
       res.status(500).json({ message: 'Error cancelling booking', error });
     }
   };
+
+
 
  
   

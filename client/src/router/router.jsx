@@ -16,7 +16,6 @@ import { Screens} from "../pages/user/Screens.jsx";
 import { Seats } from "../pages/user/Seats.jsx";
 import { Bookings } from "../pages/user/Bookings.jsx";
 import { Payment } from "../pages/user/Payment.jsx";
-import { PaymentSuccess } from "../pages/user/paymentSuccess.jsx";
 import { AdminLayout } from "../layout/AdminLayout.jsx";
 import { AddMovies } from "../pages/admin/AddMovies.jsx";
 import { MovieEditPage } from "../pages/admin/MovieEditPage.jsx";
@@ -25,6 +24,7 @@ import { AdminHome } from "../pages/admin/AdminHome.jsx";
 import { Settings } from "../pages/admin/Settings.jsx";
 import { AdminProfile } from "../pages/admin/AdminProfile.jsx";
 import ScrollToTop from "../components/shared/ScrollToTop.jsx";
+import { CreateScreen } from "../pages/admin/CreateScreen.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -105,10 +105,6 @@ export const router = createBrowserRouter([
         path:"/Movies/movie-details/:movieId/Screens/Seats/Payment",
         element:<Payment/>
       },
-        {
-       path:"/Movies/movie-details/:movieId/Screens/Seats/Payment/PaymentSuccess",
-       element:<PaymentSuccess/>
-        },
      
        ]
       },
@@ -143,6 +139,10 @@ export const router = createBrowserRouter([
           {
             path:"moviespage/movie-edit/:id",
             element:<MovieEditPage/>
+          },
+          {
+          path:"/admin/moviespage/create-screen/:id",
+          element:<CreateScreen/>
           },
           {
             path:"Home",

@@ -1,5 +1,5 @@
 import express from 'express'
-import {  checkUser, getBookingsByUser, updateUserProfile, userLogin, userLogOut, userProfile, userSignup } from '../controllers/userControllers.js'
+import {  checkUser, getBookingsByUser,movieBookings, updateUserProfile, userLogin, userLogOut, userProfile, userSignup } from '../controllers/userControllers.js'
 import { authUser } from '../middleware/authUser.js'
 const router = express.Router() 
 
@@ -17,7 +17,9 @@ router.post("/log-out",authUser,userLogOut)
 
 router.get("/check-user",authUser,checkUser)
 
-router.get("/my-bookings/:userId", authUser,getBookingsByUser)
+router.post("/booking",authUser,movieBookings)
+
+router.get("/mybookings", authUser,getBookingsByUser)
 
 
 export {router as userRouter}

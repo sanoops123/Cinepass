@@ -87,22 +87,6 @@ export const userLogin = async (req, res, next) => {
       .json({ error: error.message || "internal server error" });
   }
 };
-
-/*export const userProfile = async (req, res, next) => {
-  try {
-    const { user } = req;
-
-    const userData = await User.findById(user.id).select("-password");
-
-    return res.status(200).json({ message: "user profile fetched!",data: userData });
-  } catch (error) {
-    console.log(error);
-    return res
-      .status(error.status || 500)
-      .json({ error: error.message || "internal server error" });
-  }
-};
-*/
 export const userProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.id); 
@@ -150,14 +134,50 @@ export const checkUser = async (req,res,next)=>{
     .json({ error: error.message || "internal server error" });
   }
 }
-
-export const getBookingsByUser = async (req, res,next) => {
+/*
+export const getBookingsByUser = async (req, res, next) => {
   try {
-    const userId = req.params.userId;
-    const userBookings = await Booking.find({ userId }).populate('movieId', 'title releaseDate');
-    res.status(200).json({message:"my Bookings",data:userBookings});
+    // Assuming the `userId` is attached to `req.user` by your authentication middleware
+    const userId = req.user?.id;
+
+    console.log("bid====",userId);
+    
+
+    if (!userId) {
+      return res.status(400).json({ message: 'User ID is missing from the request' });
+    }
+
+    // Find bookings by userId and populate the movie details
+    const userBookings = await Booking.find({ userId }).populate('movieId', 'title posterUrl city location screenId showTime theatre city time');
+
+    // Respond with the bookings
+    res.status(200).json({ message: 'My Bookings',  userBookings });
   } catch (error) {
+    console.error('Error fetching bookings:', error);
     res.status(500).json({ message: 'Error fetching bookings for user', error });
+  }
+};
+*/
+export const getBookingsByUser = async (req, res, next) => {
+  try {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is missing from the request" });
+    }
+
+    // Fetch bookings with populated movie details
+    const userBookings = await Booking.find({ userId }).populate(
+      "movieId",
+      "title posterUrl"
+    );
+
+    console.log("User Bookings:", userBookings);
+
+    res.status(200).json({ message: "My Bookings", userBookings });
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    res.status(500).json({ message: "Error fetching bookings for user", error });
   }
 };
 
@@ -187,5 +207,32 @@ export const updateUserProfile = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+export const movieBookings = async (req, res) => {
+  try {
+    const { movieId, showDate, theater, city, seats, totalPrice } = req.body;
+    const userId = req.user?.id;
 
+    console.log("Booking Request: ", { movieId, userId, showDate, seats, totalPrice });
 
+    if (!movieId || !userId || !showDate || !seats || seats.length === 0) {
+      return res.status(400).json({ message: "Missing required booking details" });
+    }
+
+    const booking = new Booking({
+      movieId,
+      userId,
+      showDate,
+      theater,
+      city,
+      seats,
+      totalPrice,
+    });
+
+    await booking.save();
+    console.log("Booking saved:", booking);
+    res.status(201).json({ message: "Booking successful", booking });
+  } catch (error) {
+    console.error("Booking error:", error); // Log the error
+    res.status(500).json({ message: "Failed to book movie", error });
+  }
+};

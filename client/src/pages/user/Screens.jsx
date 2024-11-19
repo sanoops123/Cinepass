@@ -45,16 +45,12 @@ export const Screens = () => {
         movieId: id, 
         title,
         theater: screen, 
-        time, 
+        time,
         showDate, 
         city: selectedCity
       }
     });
   };
-
-  
-  
-  
 
   return (
     <div className="bg-gray-100 min-h-screen p-6">

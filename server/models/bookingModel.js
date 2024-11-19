@@ -11,11 +11,19 @@ const bookingSchema = new mongoose.Schema({
   },
   showTime: {
     type: String,
-    required: true,
+    //required: true,
   },
   movieId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Movie",
+    required: true,
+  },
+  theatre: {
+    type: String,
+    //required: true,
+  },
+  city: {
+    type: String,
     required: true,
   },
   screenId: {
@@ -25,22 +33,8 @@ const bookingSchema = new mongoose.Schema({
   },
   seats: [
     {
-     /* row: {
-        type: String,
-        required: true,
-      },
-      col: {
-        type: Number,
-        required: true,
-      },
-      seat_id: {
-        type: String,
-        //required: true,
-      },
-      price: {
-        type: Number,
-        required: true,
-      },*/
+    type:String,
+    required:true
     },
   ],
   totalPrice: {
@@ -53,7 +47,7 @@ const bookingSchema = new mongoose.Schema({
   },
   paymentType: {
     type: String,
-    required: true,
+    //required: true,
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,

@@ -10,12 +10,12 @@ export const createScreen = async (req, res, next) => {
       location,
       city,
       screenType,
-      seats, // Make sure this is an array of seat objects
-      movieSchedules, // Optional, can be empty
+      seats, 
+      movieSchedules, 
     });
     await newScreen.save();
 
-    res.status(201).json({ message: "Screen created successfully", newScreen });
+    res.status(201).json({ message: "Screen created successfully", data:newScreen });
   } catch (error) {
     res.status(500).json({ message: "Error creating screen", error });
   }
@@ -35,7 +35,7 @@ export const getAllScreens = async (req, res, next) => {
 
 export const getScreenById = async (req, res, next) => {
   try {
-    console.log("Screen ID:", req.params.id); // Log the screen ID
+    console.log("Screen ID:", req.params.id); 
     const screen = await Screen.findById(req.params.id).populate(
       "movieSchedules.movieId",
       "title"

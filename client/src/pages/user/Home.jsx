@@ -11,8 +11,8 @@ export const Home = () => {
     { id: 4, title: "The Shawshank Redemption", genre: "Comedy,Romance", duration: "2h 16m",posterUrl: "titles/TSR.jpg" },
     { id: 5, title: "churuli",genre: "Horror/Mystery", duration: "2h 12m", posterUrl: "titles/churuli.jpg" },
     { id: 6, title: "Taxi driver", genre: "Crime,Noir", duration: "1h 53m", posterUrl: "titles/taxi driver.jpg"},
-    { id: 7, title: "The pursuit of happiness", genre: "Family,Drama", duration: "1h 57m",posterUrl: "src/components/titles/poh.jpg" },
-    { id: 8, title: "Fight Club", genre: "Dram, Thriller", duration: "2h 19m" ,posterUrl: "src/components/titles/fight club.jpg"},
+    { id: 7, title: "The pursuit of happiness", genre: "Family,Drama", duration: "1h 57m",posterUrl: "titles/poh.jpg" },
+    { id: 8, title: "Fight Club", genre: "Dram, Thriller", duration: "2h 19m" ,posterUrl: "titles/fight club.jpg"},
   ];
 
 

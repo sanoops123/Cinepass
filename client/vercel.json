@@ -1,5 +1,19 @@
 {
+  "version": 2,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
+    {
+      "source": "/api/:path*",
+      "destination": "https://cinepass-nu.vercel.app/api/:path*"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/index.html",
+      "statusCode": 200
+    }
+  ],
+  "static": {
+    "cacheControl": "public, max-age=0, must-revalidate"
+  }
 }

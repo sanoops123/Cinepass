@@ -215,14 +215,14 @@ export const UserHeader = () => {
   return (
     <header className="bg-blue-600 text-white shadow-lg w-full relative z-50">
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
-        {/* Logo */}
+        
         <div className="text-2xl font-bold">
           <Link to="/" className="text-white">
             CineTickets..
           </Link>
         </div>
 
-        {/* Search Bar (Visible on larger screens) */}
+     
         <div className="hidden md:flex items-center bg-white rounded-md overflow-hidden">
           <input
             type="text"
@@ -234,7 +234,7 @@ export const UserHeader = () => {
           </button>
         </div>
 
-        {/* Mobile Menu Icon */}
+       
         <div className="md:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -244,7 +244,6 @@ export const UserHeader = () => {
           </button>
         </div>
 
-        {/* Navigation Links */}
         <nav
           className={`${
             isMenuOpen ? "block" : "hidden"
@@ -264,7 +263,7 @@ export const UserHeader = () => {
             About
           </Link>
 
-          {/* User Options */}
+  
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-center">
             <Darkmode />
             <span>Welcome</span>
@@ -292,7 +291,7 @@ export const UserHeader = () => {
         </nav>
       </div>
 
-      {/* Mobile Search Bar */}
+     
       <div className="md:hidden bg-white rounded-md overflow-hidden px-4 py-2 mt-2">
         <input
           type="text"

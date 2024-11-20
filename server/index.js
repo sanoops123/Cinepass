@@ -229,17 +229,13 @@ const corsOptions = {
   origin: (origin, callback) => {
     const allowedOrigins = [
       "http://localhost:5173", // Local development
-      "https://frontend-virid-one-14.vercel.app", // Specific frontend domain
+      "https://frontend-virid-one-14.vercel.app", // Main frontend domain
       /^https:\/\/.*\.vercel\.app$/, // Any Vercel subdomain
     ];
 
-    const isAllowed = allowedOrigins.some((pattern) =>
-      typeof pattern === 'string'
-        ? pattern === origin
-        : pattern.test(origin)
-    );
-
-    if (isAllowed || !origin) {
+    if (!origin || allowedOrigins.some((pattern) => 
+      typeof pattern === "string" ? pattern === origin : pattern.test(origin)
+    )) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
@@ -260,6 +256,10 @@ app.use((req, res, next) => {
 // Default Route
 app.get('/', (req, res) => {
   res.send('Hello, CinePass backend is running!');
+});
+
+app.get('/health', (req, res) => {
+  res.json({ message: 'API is healthy!' });
 });
 
 // API Routes

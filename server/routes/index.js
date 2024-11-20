@@ -20,6 +20,10 @@ router.use("/seat",seatRouter)
 router.use("/payments",paymentRoute)
 
 
-
-
+router.get('/health', (req, res) => {
+    res.json({ message: 'API is healthy!' });
+  });
+  router.get('/', (req, res) => {
+    res.json({ message: 'API Root Endpoint' });
+  });
 export {router as apiRoute}

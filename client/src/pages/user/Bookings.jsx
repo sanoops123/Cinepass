@@ -26,7 +26,7 @@ export const Bookings = () => {
   
     <div className="min-h-screen bg-gray-100 p-6">
        <div className="text-2xl font-bold">
-          <Link to="/" className="text-blue-600 "><h1 className="font-bold">CineThinks..</h1></Link>
+          <Link to="/" className="text-blue-600 "><h1 className="font-bold">CineTickets..</h1></Link>
         </div>
       <h1 className="text-2xl font-bold mb-4 text-center">My Bookings</h1>
       {bookings.length > 0 ? (

@@ -51,7 +51,7 @@ export const Header = () => {
     <header className="bg-blue-600 text-white shadow-lg w-full">
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         <div className="text-2xl font-bold">
-          <Link to="/" className="text-white"><h1 className="font-bold">CineThinks..</h1></Link>
+          <Link to="/" className="text-white"><h1 className="font-bold"> CineTickets..</h1></Link>
         </div>
 
         

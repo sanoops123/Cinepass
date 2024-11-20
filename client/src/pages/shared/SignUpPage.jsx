@@ -71,7 +71,7 @@ export const SignUpPage = () => {
             <label htmlFor="mobile" className="block text-gray-700">Mobile</label>
             <input
               type="tel"
-              placeholder='Enter your mobile number...'
+              placeholder='Enter your mobile (10digits)...'
               {...register("mobile")}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
               required

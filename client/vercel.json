@@ -6,15 +6,15 @@
       "destination": "https://cinepass-nu.vercel.app/api/:path*"
     }
   ],
-  "redirects": [
+  "headers": [
     {
-      "source": "/",
-      "destination": "/index.html",
-      "statusCode": 200
+      "source": "/:all*(js|css|png|jpg|jpeg|svg|woff|woff2|ttf|otf)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
-  ],
-  "static": {
-    "cacheControl": "public, max-age=0, must-revalidate"
-  }
+  ]
 }
-

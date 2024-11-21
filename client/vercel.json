@@ -4,6 +4,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://cinepass-nu.vercel.app/api/:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
     }
   ],
   "headers": [

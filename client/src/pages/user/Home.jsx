@@ -22,21 +22,19 @@ export const Home = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen">
       
-      <section className="relative w-full h-80 bg-gradient-to-r from-purple-600 to-blue-600">
+      <section className="relative w-full h-72 bg-gradient-to-r from-purple-600 to-blue-600">
         <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-5">
           <h1 className="text-4xl font-bold mb-4">Welcome to CineThinks..</h1>
-          <p className="text-lg">Book tickets for your favorite movies, shows, and events!</p>
-          <button className="mt-5 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg">
-            Explore Now
-          </button>
+          <p className="text-lg">Book tickets for your favorite movies..</p>
+          
         </div>
       </section>
 
       
       <section className="p-8">
         <h2 className="text-3xl font-semibold mb-6">Top Categories</h2>
-        <div className="grid grid-cols-3 gap-4">
-          {['Now Showing', 'Coming Soon', 'Popular'].map((category, index) => (
+        <div className="grid grid-cols-5 gap-4">
+          {['Now Showing'].map((category, index) => (
             <div
               key={index}
               className="bg-gray-800 p-6 rounded-lg text-center hover:bg-gray-700 transition duration-300"

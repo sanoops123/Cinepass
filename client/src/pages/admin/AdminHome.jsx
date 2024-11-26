@@ -6,14 +6,14 @@ export const AdminHome = () => {
 
   
   const movies = [
-    { id: 1, title: "Inception", genre: "Sci-Fi,Action", duration: "2h 28m" ,posterUrl: "" },
-    { id: 2, title: "The Dark Knight", genre: "Action", duration: "2h 32m" ,posterUrl: "src/components/titles/dark knight.jpg"},
-    { id: 3, title: "Interstellar", genre: "Sci-fi/Adventure", duration: "2h 49m" ,posterUrl: "src/components/titles/interstellar.jpg"},
-    { id: 4, title: "The Shawshank Redemption", genre: "Comedy,Romance", duration: "2h 16m",posterUrl: "src/components/titles/TSR.jpg" },
-    { id: 5, title: "churuli",genre: "Horror/Mystery", duration: "2h 12m", posterUrl: "src/components/titles/churuli.jpg" },
-    { id: 6, title: "Taxi driver", genre: "Crime,Noir", duration: "1h 53m", posterUrl: "src/components/titles/taxi driver.jpg"},
-    { id: 7, title: "The pursuit of happiness", genre: "Family,Drama", duration: "1h 57m",posterUrl: "src/components/titles/poh.jpg" },
-    { id: 8, title: "Fight Club", genre: "Dram, Thriller", duration: "2h 19m" ,posterUrl: "src/components/titles/fight club.jpg"},
+    { id: 1, title: "Inception", genre: "Sci-Fi,Action", duration: "2h 28m" ,posterUrl:  "/titles/inception.jpg" },
+    { id: 2, title: "The Dark Knight", genre: "Action", duration: "2h 32m" ,posterUrl: "/titles/dark knight.jpg"},
+    { id: 3, title: "Interstellar", genre: "Sci-fi/Adventure", duration: "2h 49m" ,posterUrl: "/titles/interstellar.jpg"},
+    { id: 4, title: "The Shawshank Redemption", genre: "Comedy,Romance", duration: "2h 16m",posterUrl: "/titles/TSR.jpg"},
+    { id: 5, title: "churuli",genre: "Horror/Mystery", duration: "2h 12m", posterUrl: "/titles/churuli.jpg" },
+    { id: 6, title: "Taxi driver", genre: "Crime,Noir", duration: "1h 53m", posterUrl:  "/titles/taxi driver.jpg"},
+    { id: 7, title: "The pursuit of happiness", genre: "Family,Drama", duration: "1h 57m",posterUrl: "/titles/poh.jpg" },
+    { id: 8, title: "Fight Club", genre: "Dram, Thriller", duration: "2h 19m" ,posterUrl: "/titles/fight club.jpg"},
   ];
 
 
@@ -23,21 +23,19 @@ export const AdminHome = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen">
       
-      <section className="relative w-full h-80 bg-gradient-to-r from-purple-600 to-blue-600">
+      <section className="relative w-full h-72 bg-gradient-to-r from-purple-600 to-blue-600">
         <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-5">
           <h1 className="text-4xl font-bold mb-4">Welcome to CineThinks..</h1>
-          <p className="text-lg">Book tickets for your favorite movies, shows, and events!</p>
-          <button className="mt-5 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg">
-            Explore Now
-          </button>
+          <p className="text-lg">Book tickets for your favorite movies!</p>
+         
         </div>
       </section>
 
       
       <section className="p-8">
         <h2 className="text-3xl font-semibold mb-6">Top Categories</h2>
-        <div className="grid grid-cols-3 gap-4">
-          {['Now Showing', 'Coming Soon', 'Popular'].map((category, index) => (
+        <div className="grid grid-cols-5 gap-4">
+          {['Now Showing', 'Coming Soon'].map((category, index) => (
             <div
               key={index}
               className="bg-gray-800 p-6 rounded-lg text-center hover:bg-gray-700 transition duration-300"

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { UserHeader } from '../components/user/UserHeader'
+import { Footer } from '../components/user/Footer'
 
 export const ProtectRoute = () => {
    
@@ -22,5 +24,11 @@ export const ProtectRoute = () => {
 
    
 
-  return userAuthorized && <Outlet/> 
+  return  (
+    <>
+      {userAuthorized && <UserHeader />}
+      <Outlet />
+      <Footer />
+    </>
+  );
 }

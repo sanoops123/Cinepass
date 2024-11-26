@@ -6,7 +6,6 @@ import { About } from "../pages/user/About.jsx";
 import { Movies } from "../pages/user/Movies.jsx";
 import { Events } from "../pages/user/Events.jsx";
 import { Contact } from "../pages/user/Contact.jsx";
-import { Plays } from "../pages/user/Plays.jsx";
 import {LoginPage} from "../pages/shared/LoginPage.jsx" 
 import {SignUpPage} from "../pages/shared/SignUpPage.jsx" 
 import { Profile } from "../pages/user/Profile.jsx";
@@ -66,11 +65,6 @@ export const router = createBrowserRouter([
         element:<Contact/>
       },
       {
-        path:'Plays',
-        element:<Plays/>
-      },
-     
-      {
        path:"Movies/movie-details/:id/Screens",
         element:<Screens/>
       },
@@ -103,7 +97,7 @@ export const router = createBrowserRouter([
       children:[{
      
         path:"/Movies/movie-details/:movieId/Screens/Seats/Payment",
-        element:<Payment/>
+        element:(<><ScrollToTop/> <Payment/></>)
       },
      
        ]

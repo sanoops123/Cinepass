@@ -6,7 +6,6 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { AxiosInstance } from "../config/AxiosInstance";
 import { useSelector, useDispatch } from "react-redux";
 import { saveUser, clearUser } from "../redux/features/userSlice";
-import { Home } from "lucide-react";
 
 export const Userlayout = () => {
   const navigate = useNavigate();

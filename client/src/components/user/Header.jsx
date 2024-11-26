@@ -97,7 +97,6 @@ export const Header = () => {
         <nav className="hidden md:flex space-x-6 items-center">
           <Link to="/Movies" className="text-white hover:text-gray-300">Movies</Link>
           <Link to="/Events" className="text-white hover:text-gray-300">Events</Link>
-          <Link to="/Plays" className="text-white hover:text-gray-300">Plays</Link>
           <Link to="/About" className="text-white hover:text-gray-300">About</Link>
         </nav>
         
@@ -125,8 +124,6 @@ export const Header = () => {
           <nav className="flex flex-col items-center py-4 space-y-2">
             <Link to="/" className="text-white hover:text-gray-300">Movies</Link>
             <Link to="/events" className="text-white hover:text-gray-300">Events</Link>
-            <Link to="/plays" className="text-white hover:text-gray-300">Plays</Link>
-            <Link to="/sports" className="text-white hover:text-gray-300">Sports</Link>
             <Link to="/login" className="bg-white text-red-600 hover:bg-gray-200 px-4 py-2 rounded-md">Log in</Link>
             <Link to="/signup" className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-4 py-2 rounded-md font-semibold">Sign Up</Link>
           </nav>

@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
         },
         {
           path : '/',
-          element : <Home/>
+          element : (<><ScrollToTop/> <Home/></>)
         },
         {
           path : 'About',

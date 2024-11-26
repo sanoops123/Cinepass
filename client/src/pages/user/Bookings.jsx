@@ -11,7 +11,7 @@ export const Bookings = () => {
       try {
         const response = await AxiosInstance.get("/user/mybookings");
         console.log("Bookings Data:", response.data.userBookings);
-        setBookings(response.data.userBookings);
+        setBookings(response.data.userBookings.reverse()); 
       } catch (error) {
         console.error("Failed to fetch bookings:", error);
         toast.error("Unable to load your bookings. Please try again.");

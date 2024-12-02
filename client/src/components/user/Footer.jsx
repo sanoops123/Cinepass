@@ -22,7 +22,7 @@ export const Footer = () => {
           
             <li><a className="hover:text-yellow-500">Privacy Policy</a></li>
             <li><a  className="hover:text-yellow-500">Terms of Service</a></li>
-            <li><a className="hover:text-yellow-500">About</a></li>
+            <li><a href="/About" className="hover:text-yellow-500">About</a></li>
           </ul>
         </div>
 

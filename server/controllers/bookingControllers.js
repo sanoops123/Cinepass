@@ -32,7 +32,7 @@ export const movieBooking = async (req, res) => {
     res.status(500).json({ message: "Failed to book movie", error });
   }
 };
-
+/*
   export const cancelBooking = async (req, res,next) => {
     try {
        
@@ -48,6 +48,31 @@ export const movieBooking = async (req, res) => {
   };
 
 
+*/
+export const cancelBooking = async (req, res) => {
+  const bookingId = req.params.id;
 
- 
-  
+  try {
+    const booking = await Booking.findById(bookingId);
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found." });
+    }
+
+    const showTime = new Date(`${booking.showDate}T${booking.showTime}`);
+    const currentTime = new Date();
+    const timeDifference = (showTime - currentTime) / (1000 * 60 * 60); // Difference in hours
+
+    if (timeDifference < 2) {
+      return res.status(400).json({
+        message: "Bookings cannot be canceled within 2 hours of the showtime.",
+      });
+    }
+
+    await Booking.findByIdAndDelete(bookingId);
+
+    res.status(200).json({ message: "Booking cancelled successfully." });
+  } catch (error) {
+    console.error("Error canceling booking:", error);
+    res.status(500).json({ message: "Failed to cancel booking. Please try again." });
+  }
+};

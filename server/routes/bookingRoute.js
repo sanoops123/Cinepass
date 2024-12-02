@@ -1,6 +1,6 @@
 
 import express from 'express'
-import { cancelBooking,movieBooking } from '../controllers/bookingControllers.js'
+import { cancelBooking, movieBooking } from '../controllers/bookingControllers.js'
 import { authUser } from '../middleware/authUser.js'
 const router = express.Router() 
 

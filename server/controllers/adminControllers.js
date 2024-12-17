@@ -198,6 +198,26 @@ export const updateAdminProfile = async (req, res) => {
 };
 
 
+import { Booking } from "../models/bookingModel.js";
 
+export const getAllBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find()
+      .populate("movieId", "title posterUrl")
+      .populate("screenId", "name")
+      .populate("userId", "name email");
 
-
+    res.status(200).json({
+      success: true,
+      message: "All bookings fetched successfully.",
+      data: bookings,
+    });
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch bookings.",
+      error: error.message,
+    });
+  }
+};

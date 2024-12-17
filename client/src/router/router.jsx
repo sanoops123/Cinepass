@@ -24,6 +24,8 @@ import { Settings } from "../pages/admin/Settings.jsx";
 import { AdminProfile } from "../pages/admin/AdminProfile.jsx";
 import ScrollToTop from "../components/shared/ScrollToTop.jsx";
 import { CreateScreen } from "../pages/admin/CreateScreen.jsx";
+import { Theatres } from "../pages/user/Theatres.jsx";
+import { FetchBookings } from "../pages/admin/FetchBookings.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -49,11 +51,19 @@ export const router = createBrowserRouter([
           element : <About/>
         },
         {
+          path:'theatres',
+          element:<Theatres/>
+        },
+        {
           path:'movies',
           element:(<><ScrollToTop/> <Movies/></>)
         },
         {
         path:"movies/movie-details/:id",
+        element:<FetchMovieDetails/>
+        },
+        {
+        path: "theatres/movie-details/:id",
         element:<FetchMovieDetails/>
         },
         {
@@ -141,6 +151,10 @@ export const router = createBrowserRouter([
           {
             path:"Home",
             element:<AdminHome/>
+          },
+          {
+            path:"users-Bookings",
+            element: <FetchBookings/>
           }
         ]
       }

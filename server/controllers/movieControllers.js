@@ -1,5 +1,7 @@
+
 import { Movie } from "../models/moviesModel.js";
 import { handleImageUpload } from "../utils/cloudinary.js";
+
 
 export const getMovies = async (req, res, next) => {
   try {
@@ -124,7 +126,7 @@ export const getUpcomingMovies = async (req, res, next) => {
 
 export const searchMovies = async (req, res, next) => {
   try {
-    const { q } = req.query; // Extract the search term from query parameters
+    const { q } = req.query;
 
     const searchMovies = await Movie.find({
       title: { $regex: q, $options: 'i' } // Use 'q' as the search term for the title

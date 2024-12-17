@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Darkmode } from "../shared/Darkmode.jsx";
 import { AxiosInstance } from "../../config/AxiosInstance.jsx";
@@ -8,7 +8,46 @@ import toast from "react-hot-toast";
 
 export const UserHeader = () => {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedCity, setSelectedCity] = useState(""); // Default city set to empty string
+  const [theatres, setTheatres] = useState([]);
+
+  const cities = [
+    "Alappuzha",
+    "Ernakulam",
+    "Idukki",
+    "Kannur",
+    "Kasaragod",
+    "Kollam",
+    "Kottayam",
+    "Kozhikode",
+    "Malappuram",
+    "Palakkad",
+    "Pathanamthitta",
+    "Thiruvananthapuram",
+    "Thrissur",
+    "Wayanad",
+  ];
+
+  const handleCityChange = async (e) => {
+    const city = e.target.value;
+    setSelectedCity(city);
+
+    if (city) {
+      try {
+        const response = await AxiosInstance.get(`/theatre/get-theatres`);
+        const filteredTheatres = response.data.data.filter(
+          (theatre) => theatre.city === city
+        );
+        setTheatres(filteredTheatres);
+
+        // Navigate to a new page with the city-specific theaters
+        navigate("/theatres", { state: { city, theatres: filteredTheatres } });
+      } catch (error) {
+        console.error("Error fetching theatres:", error.message);
+      }
+    }
+  };
 
   const logOut = async () => {
     try {
@@ -28,14 +67,30 @@ export const UserHeader = () => {
   return (
     <header className="bg-blue-600 text-white shadow-lg w-full relative z-50">
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
-        
+        {/* Logo */}
         <div className="text-2xl font-bold">
           <Link to="/" className="text-white">
             CineTickets..
           </Link>
         </div>
 
-     
+        {/* City Dropdown */}
+        <div className="ml-4">
+          <select
+            value={selectedCity}
+            onChange={handleCityChange}
+            className="bg-white text-gray-700 px-4 py-2 rounded-md"
+          >
+            <option value="">Select City</option> {/* Default option */}
+            {cities.map((city) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Desktop Search Bar */}
         <div className="hidden md:flex items-center bg-white rounded-md overflow-hidden">
           <input
             type="text"
@@ -47,7 +102,7 @@ export const UserHeader = () => {
           </button>
         </div>
 
-       
+        {/* Mobile Menu Toggle */}
         <div className="md:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -57,6 +112,7 @@ export const UserHeader = () => {
           </button>
         </div>
 
+        {/* Navigation */}
         <nav
           className={`${
             isMenuOpen ? "block" : "hidden"
@@ -73,7 +129,7 @@ export const UserHeader = () => {
             About
           </Link>
 
-  
+          {/* User Menu */}
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-9 items-center">
             <Darkmode />
 
@@ -101,7 +157,7 @@ export const UserHeader = () => {
         </nav>
       </div>
 
-     
+      {/* Mobile Search Bar */}
       <div className="md:hidden bg-white rounded-md overflow-hidden px-4 py-2 mt-2">
         <input
           type="text"

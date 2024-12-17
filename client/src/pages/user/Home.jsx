@@ -24,7 +24,7 @@ export const Home = () => {
       
       <section className="relative w-full h-72 bg-gradient-to-r from-purple-600 to-blue-600">
         <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-5">
-          <h1 className="text-4xl font-bold mb-4">Welcome to CineThinks..</h1>
+          <h1 className="text-4xl font-bold mb-4">Welcome to CineTickets..</h1>
           <p className="text-lg">Book tickets for your favorite movies..</p>
           
         </div>

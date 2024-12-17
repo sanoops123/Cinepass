@@ -8,6 +8,7 @@ import { bookingRouter } from './bookingRoute.js'
 import { screenRouter } from './screenRoute.js'
 import {seatRouter} from "./seatRoute.js"
 import { paymentRoute } from './paymentRoute.js'
+import { theatreRoute } from './theatreRoute.js'
 
 
 
@@ -18,6 +19,7 @@ router.use("/booking",bookingRouter)
 router.use("/screen",screenRouter)
 router.use("/seat",seatRouter)
 router.use("/payments",paymentRoute)
+router.use("/theatre",theatreRoute)
 
 
 router.get('/health', (req, res) => {

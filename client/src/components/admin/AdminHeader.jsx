@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
@@ -18,12 +19,27 @@ export const AdminHeader = () => {
         }
     };
 
+    const handleUserBookings = async () => {
+        try {
+            const response = await AxiosInstance.get("/admin/get-allBookings");
+            if (response.data.success) {
+                // Navigate to Users Bookings page with data
+                navigate("/admin/users-bookings", { state: { bookings: response.data.data } });
+            } else {
+                toast.error("Failed to fetch bookings");
+            }
+        } catch (error) {
+            toast.error("Error fetching bookings");
+            console.error("Error:", error.message);
+        }
+    };
+
     return (
         <header className="bg-gray-900 text-white shadow-lg py-4">
             <div className="container mx-auto flex justify-between items-center px-6">
                 <h1 className="text-2xl font-bold tracking-wide">Admin Dashboard</h1>
                 <nav className="flex space-x-6 items-center">
-                <Link
+                    <Link
                         to="/admin/Home"
                         className={`text-lg font-medium hover:text-gray-300 transition ${
                             location.pathname === "/admin/Home" ? "text-blue-400" : ""
@@ -63,6 +79,14 @@ export const AdminHeader = () => {
                     >
                         Profile
                     </Link>
+                    <button
+                        onClick={handleUserBookings}
+                        className={`text-lg font-medium hover:text-gray-300 transition ${
+                            location.pathname === "/admin/users-bookings" ? "text-blue-400" : ""
+                        }`}
+                    >
+                        Users Bookings
+                    </button>
                     <Darkmode />
                     <button
                         onClick={logOut}

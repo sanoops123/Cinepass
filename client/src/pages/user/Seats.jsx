@@ -10,15 +10,17 @@ export const Seats = () => {
   const location = useLocation()
   const navigate = useNavigate();
   
-  const { movieId, title, theater, city, time ,showDate,poster} = location.state || {};
+  const { movieId, title, theatre, city, time ,showDate,poster} = location.state || {};
 
   console.log(movieId,"movieiddd");
   console.log("Title:", title);
-  console.log("Theater:", theater);
+  console.log("Theater:", theatre);
   console.log("Time:", time);
   console.log("city",city);
   console.log("date",showDate);
   console.log("poster",poster);
+  
+  console.log("theee===",theatre);
   
   
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -67,7 +69,7 @@ export const Seats = () => {
 
   const handleProceedToPayment = () => {
     navigate(`/movies/movie-details/${movieId}/Screens/Seats/Payment`, {
-      state: { movieId,title,showDate, city,theater,poster, time, seats: selectedSeats }
+      state: { movieId,title,showDate, city,theatre,poster, time, seats: selectedSeats }
     });
   };
 

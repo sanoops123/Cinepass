@@ -10,7 +10,8 @@ import "react-toastify/dist/ReactToastify.css";
 const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 const stripePromise = loadStripe(stripePublicKey);
 
-export const PaymentForm = ({ movieId, title, showDate, theater,poster, city, time,seats = [] }) => {
+
+export const PaymentForm = ({ movieId, title, showDate, theatre,poster, city, time,seats = [] }) => {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
@@ -19,6 +20,9 @@ export const PaymentForm = ({ movieId, title, showDate, theater,poster, city, ti
   const [errorMessage, setErrorMessage] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [upiId, setUpiId] = useState("");
+
+  console.log("theatre===",theatre);
+  
 
   useEffect(() => {
     if (seats.length === 0) {
@@ -70,7 +74,7 @@ export const PaymentForm = ({ movieId, title, showDate, theater,poster, city, ti
         movieId,
         title,
         showDate,
-        theater,
+        theatre,
         city,
         poster,
         location,
@@ -101,7 +105,7 @@ export const PaymentForm = ({ movieId, title, showDate, theater,poster, city, ti
       <ToastContainer />
       <form onSubmit={handleSubmit} className="p-8 bg-white rounded-lg shadow-md max-w-md mx-auto">
         <h2 className="text-xl font-semibold mb-4">Complete Payment for {title}</h2>
-        <p className="text-sm text-gray-600 mb-2">Theater: {theater}, City: {city}</p>
+        <p className="text-sm text-gray-600 mb-2">Theatre: {theatre}, City: {city}</p>
         <p className="text-sm text-gray-600 mb-2">Date: {showDate}</p>
         <p className="text-sm text-gray-600 mb-2">Time: {time}</p>
         <p className="text-sm text-gray-600 mb-2">Seats: {seats.join(", ")}</p>
@@ -147,7 +151,7 @@ export const PaymentForm = ({ movieId, title, showDate, theater,poster, city, ti
 
 export const Payment = () => {
   const location = useLocation();
-  const { movieId, title, theater, city, time, seats, showDate, poster } = location.state || {};
+  const { movieId, title, theatre, city, time, seats, showDate, poster } = location.state || {};
   const navigate = useNavigate();
 
   // Validate required state
@@ -172,7 +176,7 @@ export const Payment = () => {
           movieId={movieId}
           title={title}
           showDate={showDate}
-          theater={theater}
+          theatre={theatre}
           city={city}
           time={time}
           seats={seats}

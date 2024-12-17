@@ -1,5 +1,5 @@
 import express from 'express'
-import { adminLogin, adminLogOut, adminProfile, adminSignup, checkAdmin } from '../controllers/adminControllers.js'
+import { adminLogin, adminLogOut, adminProfile, adminSignup, checkAdmin, getAllBookings } from '../controllers/adminControllers.js'
 import { authAdmin } from '../middleware/authAdmin.js'
 import { updateAdminProfile } from '../controllers/adminControllers.js'
 
@@ -20,4 +20,5 @@ router.post("/log-out",authAdmin,adminLogOut)
 
 router.get("/check-admin",authAdmin,checkAdmin)
 
+router.get("/get-allBookings",authAdmin,getAllBookings)
 export {router as adminRouter}

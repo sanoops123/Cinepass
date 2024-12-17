@@ -23,3 +23,16 @@ export const getSeats = async (req, res) => {
     }
   };
   
+
+  export const updateSeatAvailability = async (movieId, showDate, selectedSeats) => {
+    try {
+      // Update the seat status to 'booked' in the database
+      await Seat.updateMany(
+        { movieId, showDate, seatLabel: { $in: selectedSeats } },
+        { $set: { status: 'booked' } }
+      );
+    } catch (error) {
+      console.error("Error updating seat availability:", error.message);
+    }
+  };
+  

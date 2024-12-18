@@ -21,6 +21,8 @@ export const Seats = () => {
   console.log("poster",poster);
   
   console.log("theee===",theatre);
+  console.log("posttee",poster);
+  
   
   
   const [selectedSeats, setSelectedSeats] = useState([]);

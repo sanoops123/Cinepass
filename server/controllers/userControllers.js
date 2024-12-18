@@ -2,6 +2,7 @@ import { User } from "../models/userModel.js";
 import { Booking } from "../models/bookingModel.js";
 import bcrypt from "bcrypt";
 import { generateToken } from "../utils/token.js";
+import {Theatre}  from "../models/theatreModel.js"
 
 export const userSignup = async (req, res, next) => {
   try {
@@ -104,8 +105,6 @@ export const userProfile = async (req, res) => {
   }
 };
 
-
-
 export const userLogOut = async (req,res,next)=>{
   try {
     
@@ -134,30 +133,7 @@ export const checkUser = async (req,res,next)=>{
     .json({ error: error.message || "internal server error" });
   }
 }
-/*
-export const getBookingsByUser = async (req, res, next) => {
-  try {
-    // Assuming the `userId` is attached to `req.user` by your authentication middleware
-    const userId = req.user?.id;
 
-    console.log("bid====",userId);
-    
-
-    if (!userId) {
-      return res.status(400).json({ message: 'User ID is missing from the request' });
-    }
-
-    // Find bookings by userId and populate the movie details
-    const userBookings = await Booking.find({ userId }).populate('movieId', 'title posterUrl city location screenId showTime theatre city time');
-
-    // Respond with the bookings
-    res.status(200).json({ message: 'My Bookings',  userBookings });
-  } catch (error) {
-    console.error('Error fetching bookings:', error);
-    res.status(500).json({ message: 'Error fetching bookings for user', error });
-  }
-};
-*/
 export const getBookingsByUser = async (req, res, next) => {
   try {
     const userId = req.user?.id;
@@ -207,6 +183,7 @@ export const updateUserProfile = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 export const movieBookings = async (req, res) => {
   try {
     const { movieId, showDate, theater, city, seats, totalPrice } = req.body;

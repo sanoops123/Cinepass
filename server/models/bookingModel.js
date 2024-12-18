@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema({
@@ -5,14 +6,14 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  showDate: {
+  /*showDate: {
     type: String,
     required: true,
   },
   showTime: {
     type: String,
     //required: true,
-  },
+  },*/
   movieId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Movie",
@@ -24,7 +25,7 @@ const bookingSchema = new mongoose.Schema({
   },
   city: {
     type: String,
-    required: true,
+    // required: true,
   },
   screenId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -49,6 +50,8 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     //required: true,
   },
+  showDate: { type: Date, required: true },  // store showDate as Date object
+  showTime: { type: String, required: true }, // store showTime as "HH:mm" string
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -57,3 +60,4 @@ const bookingSchema = new mongoose.Schema({
 });
 
 export const Booking = mongoose.model("Booking", bookingSchema);
+

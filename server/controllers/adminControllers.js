@@ -1,6 +1,7 @@
 import { Admin } from "../models/adminModel.js";
 import bcrypt from "bcrypt";
 import { generateToken } from "../utils/token.js";
+import { Booking } from "../models/bookingModel.js";
 
 export const adminSignup = async (req, res, next) => {
   try {
@@ -138,7 +139,6 @@ export const adminProfile = async (req, res, next) => {
   }
 };
 
-
 export const adminLogOut = async (req, res, next) => {
   try {
     res.clearCookie("token",{
@@ -197,10 +197,7 @@ export const updateAdminProfile = async (req, res) => {
   }
 };
 
-
-import { Booking } from "../models/bookingModel.js";
-
-export const getAllBookings = async (req, res) => {
+/*export const getAllBookings = async (req, res) => {
   try {
     const bookings = await Booking.find()
       .populate("movieId", "title posterUrl")
@@ -218,6 +215,36 @@ export const getAllBookings = async (req, res) => {
       success: false,
       message: "Failed to fetch bookings.",
       error: error.message,
+    });
+  }
+};
+*/
+export const getAllBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find()
+      .populate("movieId", "title posterUrl")
+      .populate("screenId", "name")
+      .populate("userId", "name email");
+
+    if (!bookings || bookings.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No bookings found.",
+        data: [],
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "All bookings fetched successfully.",
+      data: bookings,
+    });
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch bookings.",
+      error: error.message || "Unknown error",
     });
   }
 };

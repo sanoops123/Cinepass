@@ -11,7 +11,7 @@ const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 const stripePromise = loadStripe(stripePublicKey);
 
 
-export const PaymentForm = ({ movieId, title, showDate, theatre,poster, city, time,seats = [] }) => {
+export const PaymentForm = ({ movieId, title, showDate, theatre, poster , city, time,seats = [] }) => {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
@@ -22,6 +22,8 @@ export const PaymentForm = ({ movieId, title, showDate, theatre,poster, city, ti
   const [upiId, setUpiId] = useState("");
 
   console.log("theatre===",theatre);
+  console.log("posterr",poster);
+  
   
 
   useEffect(() => {
@@ -69,24 +71,26 @@ export const PaymentForm = ({ movieId, title, showDate, theatre,poster, city, ti
       }
       if (error) throw error;
       toast.success("Payment successful! Your booking is confirmed.");
-      
-      const bookingDetails = {
-        movieId,
-        title,
-        showDate,
-        theatre,
-        city,
-        poster,
-        location,
-        showTime:time,
-        seats,
-        totalPrice: seats.length * 150,
-      };
+      const [day, month, year] = showDate.split("/"); // Split into day, month, year
+const formattedDate = `${year}-${month}-${day}`; // Convert to ISO format (YYYY-MM-DD)
+
+const bookingDetails = {
+  movieId,
+  title,
+  showDate: formattedDate, // Send corrected date format
+  theatre,
+  city,
+  poster,
+  showTime: time,
+  seats,
+  totalPrice: seats.length * 150,
+};
+
       console.log("Booking details being sent:", bookingDetails);
       
      const response = await AxiosInstance.post("/booking/moviebooking", bookingDetails); // Save booking to backend
 
-     console.log("responseb==",response);
+     console.log("response==",response);
      
       // Redirect to 'My Bookings' page
       setTimeout(() => {

@@ -24,7 +24,7 @@ export const AdminHeader = () => {
             const response = await AxiosInstance.get("/admin/get-allBookings");
             if (response.data.success) {
                 // Navigate to Users Bookings page with data
-                navigate("/admin/users-bookings", { state: { bookings: response.data.data } });
+                navigate("/admin/users-bookings", { state: { bookings: response.data.data.reverse() } });
             } else {
                 toast.error("Failed to fetch bookings");
             }

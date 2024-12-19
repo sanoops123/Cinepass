@@ -1,5 +1,5 @@
 
-
+/*
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../config/AxiosInstance.jsx";
@@ -135,6 +135,183 @@ export const Screens = () => {
           Theatres in {selectedCity}
         </h1>
 
+        
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Select City:
+          </label>
+          <select
+            value={selectedCity}
+            onChange={(e) => setSelectedCity(e.target.value)}
+            className="mt-1 block w-44 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500"
+          >
+            {cities.map((city) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Select Date:
+          </label>
+          <select
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            className="mt-1 block w-44 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500"
+          >
+            {dateOptions.map((date) => (
+              <option key={date} value={date}>
+                {date === todayDate ? "Today" : date}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="space-y-6">
+          {realTimeFilteredScreens.length > 0 ? (
+            realTimeFilteredScreens.map((screen, index) => (
+              <div key={index} className="border-b pb-4">
+                <h2 className="text-xl font-semibold text-gray-700 mb-2">
+                  {screen.theatreDetails?.name}{" "}
+                  {screen.screenName ? `(${screen.screenName})` : ""}
+                </h2>
+                <div className="space-y-2">
+                  {screen.filteredSchedules.map((schedule, i) => (
+                    <div key={i} className="flex items-center gap-4">
+                      <div className="text-gray-700 font-medium">
+                        {selectedDate}:
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {schedule.showTime.map((time, j) => (
+                          <button
+                            key={j}
+                            onClick={() =>
+                              goToBookingPage(screen, time, selectedDate)
+                            }
+                            className="px-4 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700"
+                          >
+                            {time}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-600">
+              {selectedDate === todayDate
+                ? "Today has no more shows for this movie."
+                : "No shows available for the selected date."}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+*/
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { AxiosInstance } from "../../config/AxiosInstance.jsx";
+
+const cities = ["Kochi", "Thiruvananthapuram", "Alappuzha", "Thrissur"];
+
+export const Screens = () => {
+  const [selectedCity, setSelectedCity] = useState("Alappuzha");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [screens, setScreens] = useState([]);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { title, poster } = location.state || {};
+
+  // Fetch screens by movie ID
+  const fetchScreens = async () => {
+    try {
+      const response = await AxiosInstance.get(`/screen/by-movie/${id}`);
+      console.log("Fetched screens data:", response.data);
+      setScreens(response.data.data); // Set screens from backend response
+    } catch (error) {
+      console.error("Error fetching screens", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchScreens();
+  }, [id]);
+
+  // Format a date to DD/MM/YYYY
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const todayDate = formatDate(new Date());
+
+  // Generate date options for the next 7 days
+  const generateDateOptions = () => {
+    const dates = [];
+    for (let i = 0; i < 7; i++) {
+      const date = new Date();
+      date.setDate(date.getDate() + i);
+      dates.push(formatDate(date));
+    }
+    return dates;
+  };
+
+  const dateOptions = generateDateOptions();
+
+  // Set default selectedDate to today's date if empty
+  useEffect(() => {
+    if (!selectedDate) setSelectedDate(todayDate);
+  }, [selectedDate, todayDate]);
+
+  // Filter screens based on city and selected date
+  const filteredScreens = screens.filter((screen) => {
+    const city = screen?.theatreDetails?.city?.trim().toLowerCase();
+    if (city !== selectedCity.trim().toLowerCase()) return false;
+
+    // Filter schedules by selected date
+    screen.filteredSchedules = screen.movieSchedules.filter((schedule) => {
+      const formattedDates = schedule.showDate.map((date) => formatDate(date));
+      return formattedDates.includes(selectedDate);
+    });
+
+    return screen.filteredSchedules.length > 0;
+  });
+
+  // Handle button click for booking
+  const goToBookingPage = (screen, time, showDate) => {
+    navigate(`/movies/movie-details/${id}/Screens/Seats`, {
+      state: {
+        poster,
+        movieId: id,
+        title,
+        theatre: screen.theatreDetails.name,
+        screen: screen.screenName,
+        time,
+        showDate,
+        city: selectedCity,
+      },
+    });
+  };
+
+  return (
+    <div className="bg-gray-100 min-h-screen p-6">
+      <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
+        <h1 className="text-2xl font-bold text-gray-500 mb-4">{title}</h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-4">
+          Theatres in {selectedCity}
+        </h1>
+
         {/* City Selection */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
@@ -173,12 +350,12 @@ export const Screens = () => {
 
         {/* Screen Listing */}
         <div className="space-y-6">
-          {realTimeFilteredScreens.length > 0 ? (
-            realTimeFilteredScreens.map((screen, index) => (
+          {filteredScreens.length > 0 ? (
+            filteredScreens.map((screen, index) => (
               <div key={index} className="border-b pb-4">
                 <h2 className="text-xl font-semibold text-gray-700 mb-2">
-                  {screen.theatreDetails?.name}{" "}
-                  {screen.screenName ? `(${screen.screenName})` : ""}
+                  {screen.theatreDetails?.name || "Unknown Theatre"}
+                  {screen.screenName ? ` (${screen.screenName.trim()})` : ""}
                 </h2>
                 <div className="space-y-2">
                   {screen.filteredSchedules.map((schedule, i) => (

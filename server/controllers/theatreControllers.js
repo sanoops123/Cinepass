@@ -123,66 +123,6 @@ export const deleteTheatre = async (req, res) => {
   }
 };
 
-/*export const addMovieToTheatre = async (req, res) => { 
-  const { theatreId } = req.params;
-  const { movieId, showTimes, showDate } = req.body;
-
-  try {
-    // Step 1: Find the theatre by its ID
-    const theatre = await Theatre.findById(theatreId).populate("screens"); // Ensure screens are populated
-
-    if (!theatre) {
-      return res.status(404).json({ message: "Theatre not found" });
-    }
-
-    // Step 2: Check if the movie exists in the database
-    const movie = await Movie.findById(movieId);
-
-    if (!movie) {
-      return res.status(404).json({ message: "Movie not found" });
-    }
-
-    // Step 3: Create a movie schedule
-    const movieSchedule = {
-      movieId: movieId,
-      showTime: showTimes, // Array of showtimes
-      showDate: showDate, // Date of the show
-    };
-
-    // Step 4: Check if the theatre has multiple screens
-    if (theatre.hasMultipleScreens) {
-      // If there are screens, add the movie schedule to a specific screen
-      // Example: Assign the movie to the first screen (you can modify this as needed)
-      if (theatre.screens.length > 0) {
-        // Assuming you want to add the schedule to the first screen
-        theatre.screens[0].movieSchedules.push(movieSchedule);
-        await theatre.screens[0].save();
-      } else {
-        return res.status(400).json({ message: "No screens available for this theatre" });
-      }
-    } else {
-      // If there's only one screen, add the schedule directly to the theatre's movieSchedules
-      theatre.movieSchedules.push(movieSchedule);
-    }
-
-    // Step 5: Save the updated theatre
-    await theatre.save();
-
-    // Step 6: Fetch the updated theatre with populated movie details
-    const updatedTheatre = await Theatre.findById(theatreId).populate({
-      path: "movieSchedules.movieId", // Populate movie details in schedules
-      select: "title genre releaseDate duration", // Choose the fields to populate
-    });
-
-    res.status(200).json({
-      message: "Movie added successfully to theatre",
-      data: updatedTheatre,
-    });
-  } catch (error) {
-    console.error("Error adding movie to theatre:", error.message);
-    res.status(500).json({ message: "Error adding movie to theatre", error });
-  }
-};*/
 
 export const addMovieToTheatre = async (req, res) => {
   const { theatreId, screenId } = req.params; // screenId is optional, for specific screen
@@ -293,7 +233,6 @@ export const addMovieToTheatre = async (req, res) => {
     res.status(500).json({ message: "Error adding movie to theatre/screen", error });
   }
 };
-
 
 
 // Function to fetch theatres with movie schedules

@@ -35,6 +35,7 @@ export const Theatre = mongoose.model("Theatre", theatreSchema);
   movieSchedules: [
     {
       movieId: { type: mongoose.Schema.Types.ObjectId, ref: "Movie" },
+      title:{type:String},
       showTime: [String], // Array of showtimes
       showDate: {type: [Date ]}
     },

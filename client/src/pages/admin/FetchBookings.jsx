@@ -1,5 +1,4 @@
 
-
 import React from "react";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
@@ -34,10 +33,9 @@ export const FetchBookings = () => {
                             filter: "brightness(0.5)", // Dim the brightness of the background
                         }}
                     >
-                        {/* Overlay for better text visibility */}
+                       
                         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
-                        {/* Booking details */}
                         <div className="relative z-10 p-4 text-white">
                             <h2 className="text-xl font-bold mb-2 text-yellow-300">{booking.title}</h2>
                             <p className="text-lg">
@@ -61,7 +59,7 @@ export const FetchBookings = () => {
                             </p>
                             <p className="text-lg">
                                 <span className="font-semibold text-gray-300">Payment Type:</span>{" "}
-                                {booking.paymentType || "Card"} {/* Default to "Card" */}
+                                {booking.paymentType || "Card"} 
                             </p>
                             <p className="text-lg">
                                 <span className="font-semibold text-gray-300">User:</span>{" "}
@@ -74,3 +72,4 @@ export const FetchBookings = () => {
         </div>
     );
 };
+
